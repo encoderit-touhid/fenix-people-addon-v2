@@ -6,6 +6,7 @@ include_once($path_css);
 $form_id=$_GET['form_id'];
 
 //var_dump($form_id);
+//exit;
 
 if(empty($form_id) )
 {
@@ -18,7 +19,7 @@ if(empty($form_id) )
 {
     $form_id_decoded=explode(';',enc_decodeContent($form_id));
     $db_form_id=$form_id_decoded[0];
-    $db_user_id=$form_id_decoded[1];
+    $db_user_id=get_current_user_id();
     global $wpdb;
     $table_name = $wpdb->prefix . 'encoderit_fenix_people_form';
     $result = $wpdb->get_row("SELECT * FROM " . $table_name . " where id =$db_form_id and user_id=$db_user_id");

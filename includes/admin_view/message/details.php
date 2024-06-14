@@ -21,6 +21,7 @@
   $messages=$wpdb->get_results($sql);
   ?>
   <div class="message_div">
+    <h2 class="user_name_chat"> <?php echo get_user_by('ID',$user_id)->display_name;?></h2>
    <?php
         if(!empty($messages))
         {

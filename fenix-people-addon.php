@@ -26,7 +26,7 @@
  require_once( dirname( __FILE__ ).'/includes/helpers.php' );
  require_once( dirname( __FILE__ ).'/includes/woocommer-hooks.php');
  require_once( dirname( __FILE__ ).'/includes/service_request_customer.php');
- require_once( dirname( __FILE__ ).'/includes/custom_routes.php');
+ //require_once( dirname( __FILE__ ).'/includes/custom_routes.php');
  require_once( dirname( __FILE__ ).'/includes/user_functionalities.php');
  
  register_activation_hook(__FILE__,'activation_callback_function');

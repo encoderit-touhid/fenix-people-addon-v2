@@ -233,7 +233,7 @@ class fenix_people_admin_functionalities
 
 		$subject = 'Admin Upload Files to Your Request ' . ' (' . $subscriber->display_name . ')';
         
-        $view_service_request_link=site_url() .'/my-account/submitted-service-request-single-view?form_id='.enc_encodeContent($search_data.';'.$result->user_id); ;
+        $view_service_request_link=site_url() .'/my-account/submitted-service-request-single-view/?form_id='.enc_encodeContent($search_data) ;
 
 		$message = '<p>Admin Upload Files to Your Service Request Please Collect them </p>';
         
@@ -334,7 +334,7 @@ class fenix_people_admin_functionalities
  
          $subject = 'Message sent from ' . ' (' . wp_get_current_user()->display_name . ')';
          //'/my-account/send-user-message/';
-         $view_message_link=site_url(). '/my-account/send-user-message/?form_id='.enc_encodeContent(rand(1,50).';'.$_POST['receiver_id']);
+         $view_message_link=site_url(). '/my-account/send-user-message/';
  
          $message = '<p>To view Message click below</p>';
  
