@@ -32,7 +32,7 @@
   background: transparent;
   z-index: -1;
 }
-.user .view_inner::after {
+.admin .view_inner::after {
   left: auto;
   right: -9px;
 }
@@ -49,24 +49,24 @@
 
   background-color: #fff;
   border-radius: 7.5px;
-  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.15);
   min-width: 80px;
 }
 .message_view.user p {
-  border-top-left-radius: 7.5px;
-  border-top-right-radius: 0;
+  border-top-right-radius: 7.5px;
+  border-top-left-radius: 0;
   text-align: left;
 }
 .user {
-  margin-left: auto !important;
-  text-align: right;
   display: flex;
-  justify-content: end;
-  width: max-content;
 }
 .admin {
   text-align: left;
+  margin-left: auto !important;
+  display: flex;
+  justify-content: end;
+  width: max-content;
 }
 .admin_mesage_send_cont {
   width: 100%;
