@@ -106,7 +106,18 @@
   justify-content: center;
 }
 #send_message_by_admin_btn img {
-  max-width: 22px;
+ max-width: 19px;
   object-fit: contain;
+  max-height: 19px;
+  margin-top: 3px;
+}
+.user_name_chat {
+	margin-top: 0;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+	padding: 15px;
+	margin-bottom: 35px;
+	border-radius: 7.5px;
+	background: #fff;
+	text-transform: capitalize;
 }
 </style>

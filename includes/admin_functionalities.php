@@ -349,4 +349,27 @@ class fenix_people_admin_functionalities
     {
         require_once( dirname( __FILE__ ).'/admin_view/payment_gateway/index.php' );
     }
+    public static function encoder_it_set_payment_keys()
+    {
+        update_option('ENCODER_IT_STRIPE_PK',str_replace(' ', '', $_POST['ENCODER_IT_STRIPE_PK']));
+        update_option('ENCODER_IT_STRIPE_SK',str_replace(' ', '', $_POST['ENCODER_IT_STRIPE_SK']));
+        update_option('ENCODER_IT_PAYPAL_CLIENT',str_replace(' ', '', $_POST['ENCODER_IT_PAYPAL_CLIENT']));
+        update_option('ENCODER_IT_PAYPAL_SECRET',str_replace(' ', '', $_POST['ENCODER_IT_PAYPAL_SECRET']));
+         
+        $ENCODER_IT_STRIPE_PK=get_option('ENCODER_IT_STRIPE_PK');
+        $ENCODER_IT_STRIPE_SK=get_option('ENCODER_IT_STRIPE_SK');
+        $ENCODER_IT_PAYPAL_CLIENT=get_option('ENCODER_IT_PAYPAL_CLIENT');
+        $ENCODER_IT_PAYPAL_SECRET=get_option('ENCODER_IT_PAYPAL_SECRET');
+
+        if($ENCODER_IT_STRIPE_PK == "pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0Bp5aP1sB0gVic7JqBdrOgQmqYAwT7a9TOfq4UBG5ioifu9F00VwcHhkCb" || $ENCODER_IT_STRIPE_SK=="sk_test_51OD1o3HXs2mM51TXAPMu48pbSpxilR2QjxiXEipq60TE8y96wg51zs9qPSDZomhDtYGcmwIFPboEgFaHi1SINsNZ00FZ8b7i8R" || $ENCODER_IT_PAYPAL_CLIENT=="AaXp9zv9TqTd30YTT48MJgSQc_5A74dGcWoCKGfu75iqMYChNCh4drlXNB4gjmPDeUnbrLQjvWk-NNOI" || $ENCODER_IT_PAYPAL_SECRET=="EKqkmLLyfTgwswkdR-ME6J0Rco1jupQfNEZqiQW1Q20nbKv7C8a-WgwDemzBGQhpKT-DKfSyAx3ME7JE")
+        {
+
+            $message='<span style="color: tomato">Registered with Test Keys</span>';
+        }elseif(isset($ENCODER_IT_STRIPE_PK) && !empty($ENCODER_IT_STRIPE_PK) && isset($ENCODER_IT_STRIPE_SK) && !empty($ENCODER_IT_STRIPE_SK) && isset($ENCODER_IT_PAYPAL_CLIENT) && !empty($ENCODER_IT_PAYPAL_CLIENT) && isset($ENCODER_IT_PAYPAL_SECRET) && !empty($ENCODER_IT_PAYPAL_SECRET))
+        {
+            $message='<span style="color: green">Registered</span>';
+        }
+        echo $message;
+        wp_die();
+    }
 }

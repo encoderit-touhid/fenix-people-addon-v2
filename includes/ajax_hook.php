@@ -11,3 +11,5 @@ add_action('wp_ajax_fenix_people_message_by_user', array('fenix_people_user_func
 
 add_action('wp_ajax_fenix_people_message_by_admin', array('fenix_people_admin_functionalities','fenix_people_message_by_admin'));
 
+add_action('wp_ajax_encoder_it_set_payment_keys', array('fenix_people_admin_functionalities','encoder_it_set_payment_keys'));
+

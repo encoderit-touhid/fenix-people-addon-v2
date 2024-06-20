@@ -6,7 +6,8 @@ class fenix_people_create_custom_table
     {
         add_option('ENCODER_IT_STRIPE_PK','pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0Bp5aP1sB0gVic7JqBdrOgQmqYAwT7a9TOfq4UBG5ioifu9F00VwcHhkCb');
         add_option('ENCODER_IT_STRIPE_SK','sk_test_51OD1o3HXs2mM51TXAPMu48pbSpxilR2QjxiXEipq60TE8y96wg51zs9qPSDZomhDtYGcmwIFPboEgFaHi1SINsNZ00FZ8b7i8R');
-        add_option('ENCODER_IT_PAYPAL_CLIENT','AVT1TGV_xT-FR1XRXZdKgsyoXIhHf_N4-j26F0W6bYXgLcv4r2jJLu7Bsa1aabiU-0pVGrDFUIdOpvrQ');
+        add_option('ENCODER_IT_PAYPAL_CLIENT','AaXp9zv9TqTd30YTT48MJgSQc_5A74dGcWoCKGfu75iqMYChNCh4drlXNB4gjmPDeUnbrLQjvWk-NNOI');
+        add_option('ENCODER_IT_PAYPAL_SECRET','EKqkmLLyfTgwswkdR-ME6J0Rco1jupQfNEZqiQW1Q20nbKv7C8a-WgwDemzBGQhpKT-DKfSyAx3ME7JE');
 
         self::create_encoderit_fenix_people_services_table();
         self::create_encoderit_encoderit_fenix_people_form_table();

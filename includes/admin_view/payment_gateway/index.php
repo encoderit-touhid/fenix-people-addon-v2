@@ -3,6 +3,7 @@ $message='<span style="color: tomato">Not Registered</span>';
 $ENCODER_IT_STRIPE_PK=get_option('ENCODER_IT_STRIPE_PK');
 $ENCODER_IT_STRIPE_SK=get_option('ENCODER_IT_STRIPE_SK');
 $ENCODER_IT_PAYPAL_CLIENT=get_option('ENCODER_IT_PAYPAL_CLIENT');
+$ENCODER_IT_PAYPAL_SECRET=get_option('ENCODER_IT_PAYPAL_SECRET');
 
 if(isset($_POST['login'])&&!empty($_POST))
 {
@@ -18,11 +19,11 @@ else
    $ENCODER_IT_PAYPAL_CLIENT=get_option('ENCODER_IT_PAYPAL_CLIENT');
    
 }
-if($ENCODER_IT_STRIPE_PK == "pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0Bp5aP1sB0gVic7JqBdrOgQmqYAwT7a9TOfq4UBG5ioifu9F00VwcHhkCb" && $ENCODER_IT_STRIPE_SK=="sk_test_51OD1o3HXs2mM51TXAPMu48pbSpxilR2QjxiXEipq60TE8y96wg51zs9qPSDZomhDtYGcmwIFPboEgFaHi1SINsNZ00FZ8b7i8R" && $ENCODER_IT_PAYPAL_CLIENT=="AVT1TGV_xT-FR1XRXZdKgsyoXIhHf_N4-j26F0W6bYXgLcv4r2jJLu7Bsa1aabiU-0pVGrDFUIdOpvrQ")
+if($ENCODER_IT_STRIPE_PK == "pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0Bp5aP1sB0gVic7JqBdrOgQmqYAwT7a9TOfq4UBG5ioifu9F00VwcHhkCb" || $ENCODER_IT_STRIPE_SK=="sk_test_51OD1o3HXs2mM51TXAPMu48pbSpxilR2QjxiXEipq60TE8y96wg51zs9qPSDZomhDtYGcmwIFPboEgFaHi1SINsNZ00FZ8b7i8R" || $ENCODER_IT_PAYPAL_CLIENT=="AVT1TGV_xT-FR1XRXZdKgsyoXIhHf_N4-j26F0W6bYXgLcv4r2jJLu7Bsa1aabiU-0pVGrDFUIdOpvrQ" || $ENCODER_IT_PAYPAL_SECRET=="EKqkmLLyfTgwswkdR-ME6J0Rco1jupQfNEZqiQW1Q20nbKv7C8a-WgwDemzBGQhpKT-DKfSyAx3ME7JE")
    {
 
        $message='<span style="color: tomato">Registered with Test Keys</span>';
-   }elseif(isset($ENCODER_IT_STRIPE_PK) && !empty($ENCODER_IT_STRIPE_PK) && isset($ENCODER_IT_STRIPE_SK) && !empty($ENCODER_IT_STRIPE_SK) && isset($ENCODER_IT_PAYPAL_CLIENT) && !empty($ENCODER_IT_PAYPAL_CLIENT))
+   }elseif(isset($ENCODER_IT_STRIPE_PK) && !empty($ENCODER_IT_STRIPE_PK) && isset($ENCODER_IT_STRIPE_SK) && !empty($ENCODER_IT_STRIPE_SK) && isset($ENCODER_IT_PAYPAL_CLIENT) && !empty($ENCODER_IT_PAYPAL_CLIENT) && isset($ENCODER_IT_PAYPAL_SECRET) && !empty($ENCODER_IT_PAYPAL_SECRET))
    {
     $message='<span style="color: green">Registered</span>';
    }
@@ -139,6 +140,8 @@ if($ENCODER_IT_STRIPE_PK == "pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0B
                   <input type="text" id="ENCODER_IT_STRIPE_SK" name="ENCODER_IT_STRIPE_SK" value="<?=$ENCODER_IT_STRIPE_SK?>" placeholder="Stripe SK (secrect key)"/>
                   <label>Paypal Client ID</label>
                   <input type="text" id="ENCODER_IT_PAYPAL_CLIENT" name="ENCODER_IT_PAYPAL_CLIENT" value="<?=$ENCODER_IT_PAYPAL_CLIENT?>" placeholder="Paypal Client ID"/>
+                  <label>Paypal Sectet</label>
+                  <input type="text" id="ENCODER_IT_PAYPAL_SECRET" name="ENCODER_IT_PAYPAL_SECRET" value="<?=$ENCODER_IT_PAYPAL_SECRET?>" placeholder="Paypal Secret"/>
                   <button type="submit" id="encoder_option_page_Setings_button">Register</button>
                 </form>
               </div>
@@ -164,6 +167,7 @@ if($ENCODER_IT_STRIPE_PK == "pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0B
                         formdata.append('ENCODER_IT_STRIPE_PK',jQuery('#ENCODER_IT_STRIPE_PK').val())
                         formdata.append('ENCODER_IT_STRIPE_SK',jQuery('#ENCODER_IT_STRIPE_SK').val())
                         formdata.append('ENCODER_IT_PAYPAL_CLIENT',jQuery('#ENCODER_IT_PAYPAL_CLIENT').val())
+                        formdata.append('ENCODER_IT_PAYPAL_SECRET',jQuery('#ENCODER_IT_PAYPAL_SECRET').val())
                         jQuery.ajax({
                         url: action_url_ajax.ajax_url,
                         type: 'post',
@@ -173,6 +177,13 @@ if($ENCODER_IT_STRIPE_PK == "pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0B
                         data: formdata,
                         success: function(data) {
                          jQuery('#register_msg').html(data);
+                         Swal.fire({
+                            //position: "top-end",
+                            icon: "success",
+                            title: "Your data has been saved",
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
                         }
                         });
                 } else {

@@ -120,8 +120,10 @@
   justify-content: center;
 }
 #send_message_by_user_btn img {
-  max-width: 22px;
+  max-width: 19px;
   object-fit: contain;
+  max-height: 19px;
+  margin-top: 3px;
 }
 .admin_mesage_send_cont input::placeholder {
   color: rgba(0, 0, 0, 0.4);
