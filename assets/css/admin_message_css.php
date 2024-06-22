@@ -120,4 +120,24 @@
 	background: #fff;
 	text-transform: capitalize;
 }
+
+
+#send_message_by_admin_file_icon
+{
+    color: aquamarine;
+    position: absolute;
+    left: 7px;
+    top: 16px;
+    margin-right: 23px;
+    cursor:pointer;
+    font-size: 23px;
+}
+
+::-ms-input-placeholder { /* Edge 12-18 */
+  margin-left: 10px;
+}
+
+::placeholder {
+  margin-left: 10px;
+}
 </style>

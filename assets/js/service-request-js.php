@@ -333,8 +333,10 @@ if (typeof paypal !== 'undefined') {
           onApprove: function(data, actions) {
               return actions.order.capture().then(function(details) {
                   //const result=JSON.stringify(details,null,2);
+                  //console.log(JSON.stringify(deta))
                  // console.log(details.purchase_units[0].payments.captures[0].id , details.purchase_units[0].payments.captures[0].status);
-                  let paypal_tansaction_id=details.purchase_units[0].payments.captures[0].id;
+                 //let paypal_tansaction_id=details.purchase_units[0].payments.captures[0].id;
+                  let paypal_tansaction_id=details.id;
                   let paypal_transaction_status=details.purchase_units[0].payments.captures[0].status;
                   let paypal_transaction_name=details.payer.name.given_name;
                   if(paypal_transaction_status == "COMPLETED")

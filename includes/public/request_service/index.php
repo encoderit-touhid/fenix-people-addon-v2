@@ -23,7 +23,7 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . " where user_id = 
                 <?php
                 foreach($result as $key=>$value)
                 {
-                    $view_link=site_url().'/my-account/submitted-service-request-single-view/?form_id='.enc_encodeContent($value->id);
+                    $view_link=site_url().'/my-account/submitted-service-request-single-view/?form_id='.base64_encode($value->id);
                     ?>
                     <tr>
                         <td>#<?=$value->id?></td>

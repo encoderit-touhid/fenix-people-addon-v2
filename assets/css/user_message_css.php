@@ -133,4 +133,24 @@
 .admin_mesage_send_cont input::-ms-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
+
+
+#send_message_by_user_file_icon
+{
+    color: aquamarine;
+    position: absolute;
+    left: 7px;
+    top: 16px;
+    margin-right: 23px;
+    cursor:pointer
+}
+
+::-ms-input-placeholder { /* Edge 12-18 */
+  margin-left: 10px;
+}
+
+::placeholder {
+  margin-left: 10px;
+}
+
 </style>

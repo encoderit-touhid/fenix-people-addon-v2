@@ -233,7 +233,7 @@ class fenix_people_admin_functionalities
 
 		$subject = 'Admin Upload Files to Your Request ' . ' (' . $subscriber->display_name . ')';
         
-        $view_service_request_link=site_url() .'/my-account/submitted-service-request-single-view/?form_id='.enc_encodeContent($search_data) ;
+        $view_service_request_link=site_url() .'/my-account/submitted-service-request-single-view/?form_id='.base64_encode($search_data) ;
 
 		$message = '<p>Admin Upload Files to Your Service Request Please Collect them </p>';
         
@@ -309,19 +309,32 @@ class fenix_people_admin_functionalities
             ]);
         }else
         {
+            $message=$_POST['message'];
+            $is_file=0;
+            $file_url=null;
+            if(!empty($_FILES))
+            {
+               $message=fenix_people_user_functionalities::save_message_file_by_user();
+               $file_data=json_decode($message,true);
+               $file_url='<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';
+             //  exit;
+               $is_file=1;
+            }
             global $wpdb;
             $table_name = $wpdb->prefix . 'encoderit_fenix_people_chats';
 
             $data = array(
                 "sender_id" => 1,
                 "receiver_id" => $_POST['receiver_id'],
-                "message" => $_POST['message'],
+                "message" => $message,
+                "is_file" => $is_file,
                 "created_at" => date('Y-m-d H:i:s'),
               );
              $wpdb->insert($table_name, $data);
              self::message_notification_to_user();
              echo json_encode([
                 'success' => 'success',
+                'file_url'=>$file_url
                 
             ]);
         }

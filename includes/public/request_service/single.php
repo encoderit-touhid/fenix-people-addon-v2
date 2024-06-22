@@ -17,8 +17,10 @@ if(empty($form_id) )
     <?php
 }else
 {
-    $form_id_decoded=explode(';',enc_decodeContent($form_id));
-    $db_form_id=$form_id_decoded[0];
+    //$form_id_decoded=explode(';',enc_decodeContent($form_id));
+    $db_form_id=base64_decode($form_id);
+    //var_dump($form_id);
+   // exit;
     $db_user_id=get_current_user_id();
     global $wpdb;
     $table_name = $wpdb->prefix . 'encoderit_fenix_people_form';

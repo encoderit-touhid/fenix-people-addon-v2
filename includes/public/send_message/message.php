@@ -16,15 +16,32 @@
         {
             if($val->sender_id == $user_id)
             {
-                ?>
-                <div class="message_view user">
-                  <div class="view_inner">
-                    <p class="enc-white"><?=$val->message?> </p>
+              if($val->is_file == 0)
+              {
+                  ?>
+                  <div class="message_view user">
+                    <div class="view_inner">
+                      <p class="enc-white"><?=$val->message?> </p>
+                    </div>
                   </div>
-                </div>
-                <?php
+                  <?php
+              }else
+              {
+                $file_data=json_decode($val->message,true);
+                ?>
+                  <div class="message_view user">
+                    <div class="view_inner">
+                    <p class=""><?php echo '<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';?> </p>
+                      
+                    </div>
+                  </div>
+                  <?php
+              }
+               
             }else
             {
+              if($val->is_file == 0)
+              {
                 ?>
                 <div class="message_view admin">
                   <div class="view_inner">
@@ -32,6 +49,19 @@
                   </div>
                 </div>
                 <?php
+              }else
+               {
+                $file_data=json_decode($val->message,true);
+                ?>
+                  <div class="message_view admin">
+                    <div class="view_inner">
+                    <p class=""><?php echo '<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';?> </p>
+                      
+                    </div>
+                  </div>
+                  <?php
+               }
+               
             }
         }
         }
@@ -44,7 +74,9 @@
 
 <div class="admin_mesage_send_cont">
   <!-- <label for="">Send Message</label> -->
-   <input type="text" id="send_message_by_user" placeholder="Type your message here">
+  <i class="fa fa-file icon" id="send_message_by_user_file_icon"></i>
+  <input type="file" id="send_message_by_user_file"/>
+   <input type="text" id="send_message_by_user" placeholder=" Select file or text mode by click on file icon">
   <button id="send_message_by_user_btn">
     <img src="<?php echo esc_url(MY_PLUGIN_URL . 'assets/images/send_icon.png'); ?>" alt="Send Message">
   </button>

@@ -140,7 +140,7 @@ if($ENCODER_IT_STRIPE_PK == "pk_test_51OD1o3HXs2mM51TXR04wpLYzxxWNpOQWZr8Y84oV0B
                   <input type="text" id="ENCODER_IT_STRIPE_SK" name="ENCODER_IT_STRIPE_SK" value="<?=$ENCODER_IT_STRIPE_SK?>" placeholder="Stripe SK (secrect key)"/>
                   <label>Paypal Client ID</label>
                   <input type="text" id="ENCODER_IT_PAYPAL_CLIENT" name="ENCODER_IT_PAYPAL_CLIENT" value="<?=$ENCODER_IT_PAYPAL_CLIENT?>" placeholder="Paypal Client ID"/>
-                  <label>Paypal Sectet</label>
+                  <label>Paypal Secret</label>
                   <input type="text" id="ENCODER_IT_PAYPAL_SECRET" name="ENCODER_IT_PAYPAL_SECRET" value="<?=$ENCODER_IT_PAYPAL_SECRET?>" placeholder="Paypal Secret"/>
                   <button type="submit" id="encoder_option_page_Setings_button">Register</button>
                 </form>

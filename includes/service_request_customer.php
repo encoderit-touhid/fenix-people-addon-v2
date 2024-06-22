@@ -251,6 +251,23 @@ class service_request_customer
 		$message .= '<p> Contact Email: ' . wp_get_current_user()->user_email . '</p>';
 		$message .= '<p> Payment_method: ' . $_POST['payment_method'] . '</p>';
 		$message .= '<p> Transaction Number: ' . $_POST['paymentMethodId'] . '</p>';
+        $servies =json_decode(self::enc_get_json_service_service(),true);
+        $table ='<style>
+                table, th, td {
+                border: 1px solid;
+                }
+                </style>';
+        $table .='<table><tr><td>Service Name</td><td>Service Price</td></tr>';
+        foreach($servies as $service_data)
+        {
+              $table .='<tr>';
+              $table .='<td>'.$service_data["service_name"].'</td>';
+              $table .='<td>'.$service_data["service_price"].'</td>';
+              $table .='</tr>';
+        }
+        $table .='</table>';
+        $message .= $table;
+
         $message .= '<p> Total Price: ' . $_POST['total_price'] . '</p>';
 
 		$headers = "MIME-Version: 1.0" . "\r\n";
@@ -287,44 +304,158 @@ class service_request_customer
         }elseif(!empty($erros))
         {
             echo $erros;
-        }else
+        }
+        else
         {
-            $json_files_by_user=self::save_files_by_user();
-            global $wpdb;
-            $table_name = $wpdb->prefix . 'encoderit_fenix_people_form';
-            $services=self::enc_get_json_service_service();
-                    
-                    $data = array(
-                        'user_id' => wp_get_current_user()->id,
-                       // 'country_id'=>$_POST['select_country'],
-                        //'person_number' => $_POST['person_number'],
-                        'description' => empty($_POST['description']) ? null : $_POST['description'],
-                        'services' =>  $services,
-                        'files_by_user' => $json_files_by_user,
-                        'payment_method' => $_POST['payment_method'],
-                        'transaction_number' => $_POST['paymentMethodId'],
-                        'total_price' => $_POST['total_price'],
-                        'created_at' => date('Y-m-d H:i:s'),
-                    );
-            
-            $inserted=$wpdb->insert($table_name, $data);
-            if($inserted)
+            $paypal_payment_verify=self::get_paypal_payment_verified();
+            if($paypal_payment_verify == "verified")
             {
-                self::send_mail();
-                self::send_mail_client();
-                echo  json_encode([
-                    'success' => 'success',
-                    'message'=>'Form Submmited Successfully'
-                ]);
+                    $json_files_by_user=self::save_files_by_user();
+                    global $wpdb;
+                    $table_name = $wpdb->prefix . 'encoderit_fenix_people_form';
+                    $services=self::enc_get_json_service_service();
+                            
+                            $data = array(
+                                'user_id' => wp_get_current_user()->id,
+                            // 'country_id'=>$_POST['select_country'],
+                                //'person_number' => $_POST['person_number'],
+                                'description' => empty($_POST['description']) ? null : $_POST['description'],
+                                'services' =>  $services,
+                                'files_by_user' => $json_files_by_user,
+                                'payment_method' => $_POST['payment_method'],
+                                'transaction_number' => $_POST['paymentMethodId'],
+                                'total_price' => $_POST['total_price'],
+                                'created_at' => date('Y-m-d H:i:s'),
+                            );
+                    
+                    $inserted=$wpdb->insert($table_name, $data);
+                    if($inserted)
+                    {
+                        self::send_mail();
+                        self::send_mail_client();
+                        echo  json_encode([
+                            'success' => 'success',
+                            'message'=>'Form Submmited Successfully'
+                        ]);
+                    }else
+                    {
+                        echo  json_encode([
+                            'success' => 'error',
+                            'message'=>'Something worng.;'
+                        ]);
+                    }
             }else
             {
                 echo  json_encode([
                     'success' => 'error',
-                    'message'=>'Something worng.;'
+                    'message'=>'Payment Verification Failed;'
                 ]);
             }
+            
         }
       
         wp_die();
     }
+    public static function get_paypal_payment_verified()
+    {
+            $clientId = ENCODER_IT_PAYPAL_CLIENT;
+            $secret = ENCODER_IT_PAYPAL_SECRET;
+
+            $accessToken = self::getPayPalAccessToken($clientId, $secret);
+           
+            $paymentId =  $_POST['paymentMethodId'];
+    
+            $paymentDetails = self::verifyPayPalPayment($accessToken, $paymentId);
+             //var_dump($paymentDetails);
+            // exit;
+            // if ($paymentDetails['state'] == 'approved') {
+            //     return  "verified";
+            // } else {
+            //     return  "unverified";
+            // }
+            if(isset($paymentDetails['status']) && $paymentDetails['status'] == 'COMPLETED')
+            { 
+                return  "verified";    
+            }else
+            {
+                return  "unverified";
+            }
+    }
+    public static function getPayPalAccessToken($clientId, $secret) {
+        if(production)
+        {
+
+            $url = "https://api-m.paypal.com/v1/oauth2/token";
+            
+        }else
+        {
+            
+            $url = "https://api-m.sandbox.paypal.com/v1/oauth2/token"; // Use sandbox URL for testing, live URL for production
+        }
+    
+        $headers = [
+            "Accept: application/json",
+            "Accept-Language: en_US"
+        ];
+    
+        $postFields = "grant_type=client_credentials";
+    
+        $ch = curl_init();
+    
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_USERPWD, $clientId . ":" . $secret);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+    
+        $responseArray = json_decode($response, true);
+    
+        return $responseArray['access_token'];
+    }
+    public static function verifyPayPalPayment($accessToken, $orderId) {
+        if(production)
+        {
+
+            $url = "https://api-m.paypal.com/v2/checkout/orders/$orderId";
+          //  $url = "https://api.paypal.com/v1/payments/payment/$paymentId"; //
+        }else
+        {
+            $url = "https://api-m.sandbox.paypal.com/v2/checkout/orders/$orderId";  // Use sandbox URL for testing, live URL for production
+          //  $url = ""; // Use sandbox URL for testing, live URL for production
+        }
+       
+
+        $headers = [
+            "Content-Type: application/json",
+            "Authorization: Bearer $accessToken"
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // To get the response as a string
+
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+            return null;
+        }
+        curl_close($ch);
+
+        $responseArray = json_decode($response, true);
+
+        return $responseArray;
+        
+    }
+    
+    // Replace with the payment ID generated by PayPal JavaScript SDK
+   
+    
 }

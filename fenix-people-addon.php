@@ -20,7 +20,7 @@
  define('ENCODER_IT_STRIPE_SK',$ENCODER_IT_STRIPE_SK);
  define('ENCODER_IT_PAYPAL_CLIENT',$ENCODER_IT_PAYPAL_CLIENT);
  define('ENCODER_IT_PAYPAL_SECRET',$ENCODER_IT_PAYPAL_SECRET);
-
+ define('production',false);
 
  define( 'MY_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
  
@@ -67,6 +67,8 @@
 
    wp_enqueue_style('fenix_people_select_2_css','https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), PLUGIN_VERSION);
 
+   wp_enqueue_style('fenix_people_font_awosome','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', array(), PLUGIN_VERSION);
+  
    wp_enqueue_style( 'fenix_people_datatable_css', plugins_url('assets/css/datatable.css',__FILE__ ), array(), PLUGIN_VERSION);
 
    wp_register_script( 'fenix_people_datatable_js', plugins_url('assets/js/datatable.js',__FILE__ ), array(), PLUGIN_VERSION );
@@ -105,3 +107,7 @@
   return $items;
 }
 add_filter( 'wp_nav_menu_objects', 'hide_menu_item_for_logged_in_users', 10, 1 );
+
+
+
+
