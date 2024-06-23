@@ -3,7 +3,7 @@
  * Plugin Name:       Fenix people add on
  * Plugin URI:        https://encoderit.net/
  * Description:       Addon For Fenix People.
- * Version:           1.0.2
+ * Version:           1.0.5
  */
 
  define('PLUGIN_VERSION', time());

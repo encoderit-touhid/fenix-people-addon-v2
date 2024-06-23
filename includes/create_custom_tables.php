@@ -106,6 +106,7 @@ class fenix_people_create_custom_table
             `receiver_id` bigint NOT NULL,
             `message` text NOT NULL,
             `parent_id` bigint DEFAULT NULL,
+            `is_file` TINYINT NULL DEFAULT '0', 
             `created_at` datetime DEFAULT NULL,
             PRIMARY KEY (`id`)
         ) $charset_collate;";

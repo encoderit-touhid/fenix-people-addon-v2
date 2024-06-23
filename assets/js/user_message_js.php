@@ -39,6 +39,8 @@ jQuery('#send_message_by_user_btn').on('click', function(e) {
                     jQuery('.message_div').append(html);
                     jQuery('#send_message_by_user').val('')
                     jQuery('#send_message_by_user_file').val('')
+                    jQuery('#send_message_by_user_file').hide()
+                    jQuery('#send_message_by_user').show()
                     //jQuery('#send_message_by_user_file').val('')
                    // jQuery('#send_message_by_user_file').val('')
                    // jQuery('#send_message_by_user').toggle();

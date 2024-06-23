@@ -20,7 +20,7 @@ class fenix_people_user_functionalities
                 {
                    $message=self::save_message_file_by_user();
                    $file_data=json_decode($message,true);
-                   $file_url='<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';
+                   $file_url='<a style="color:#262626 !important" href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';
                  //  exit;
                    $is_file=1;
                 }

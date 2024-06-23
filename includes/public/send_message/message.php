@@ -21,7 +21,7 @@
                   ?>
                   <div class="message_view user">
                     <div class="view_inner">
-                      <p class="enc-white"><?=$val->message?> </p>
+                      <p class="enc-white cursor_title" title="<?=$val->created_at?>"><?=$val->message?> </p>
                     </div>
                   </div>
                   <?php
@@ -31,7 +31,7 @@
                 ?>
                   <div class="message_view user">
                     <div class="view_inner">
-                    <p class=""><?php echo '<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';?> </p>
+                    <p class="cursor_title" title="<?=$val->created_at?>"><?php echo '<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';?> </p>
                       
                     </div>
                   </div>
@@ -45,7 +45,7 @@
                 ?>
                 <div class="message_view admin">
                   <div class="view_inner">
-                    <p class="enc-aquamarine"><?=$val->message?> </p>
+                    <p class="enc-aquamarine cursor_title" title="<?=$val->created_at?>"><?=$val->message?> </p>
                   </div>
                 </div>
                 <?php
@@ -55,7 +55,7 @@
                 ?>
                   <div class="message_view admin">
                     <div class="view_inner">
-                    <p class=""><?php echo '<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';?> </p>
+                    <p class="cursor_title" title="<?=$val->created_at?>"><?php echo '<a href="'.wp_upload_dir()["baseurl"].$file_data['paths'].'" target="_blank">'.$file_data['name'].'</a>';?> </p>
                       
                     </div>
                   </div>

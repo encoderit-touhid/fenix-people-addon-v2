@@ -43,6 +43,8 @@ jQuery('#send_message_by_admin_btn').on('click',function(e){
                                 jQuery('.message_div').append(html);
                                 jQuery('#send_message_by_admin').val('')
                                 jQuery('#send_message_by_admin_file').val('')
+                                jQuery('#send_message_by_admin_file').hide()
+                                jQuery('#send_message_by_admin').show()
                         }
                         
 

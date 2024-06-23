@@ -137,7 +137,7 @@
 
 #send_message_by_user_file_icon
 {
-    color: aquamarine;
+    color: #262626;
     position: absolute;
     left: 7px;
     top: 16px;
@@ -151,6 +151,14 @@
 
 ::placeholder {
   margin-left: 10px;
+}
+.cursor_title
+{
+  cursor: pointer;
+}
+.cursor_title a
+{
+  color: #262626 !important;
 }
 
 </style>
