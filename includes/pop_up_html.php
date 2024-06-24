@@ -51,7 +51,9 @@ function my_custom_modal_script() {
             text-decoration: none;
             cursor: pointer;
         }
-
+        #shadow-host-companion {
+        padding: 0;
+        }
     </style>
     <script>
        // Utility function to get a cookie by name
