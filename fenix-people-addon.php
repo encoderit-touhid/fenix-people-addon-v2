@@ -32,6 +32,8 @@
  require_once( dirname( __FILE__ ).'/includes/service_request_customer.php');
  //require_once( dirname( __FILE__ ).'/includes/custom_routes.php');
  require_once( dirname( __FILE__ ).'/includes/user_functionalities.php');
+
+ require_once( dirname( __FILE__ ).'/includes/pop_up_html.php');
  
  register_activation_hook(__FILE__,'activation_callback_function');
  function activation_callback_function()
