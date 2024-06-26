@@ -180,7 +180,7 @@ add_filter( 'woocommerce_account_menu_items', 'custom_my_account_menu_items_send
    // Loop throu menu items
    foreach( $items as $key => $item ){
        if( 'orders' == $key )
-           $new_items['user-membership'] = __( 'Membership', 'woocommerce');
+           $new_items['user-membership'] = __( 'Subscription', 'woocommerce');
 
        $new_items[$key] = $item;
    }
