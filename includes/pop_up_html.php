@@ -12,7 +12,7 @@ function my_custom_modal() {
                 <h1>BOOKKEPPING ACCOUNTING AND BUSINESS MANAGEMENT SUPPORT YOU NEED !</h1>
                 <p>Accounts Payable|Accounts Receivable|BookKeeping|Accounting|Payroll|Business Solutions </p>
              </div>
-            <p><?php echo do_shortcode('[forminator_form id="841"]')?></p>
+            <p><?php echo do_shortcode('[forminator_form id="839"]')?></p>
         </div>
     </div>
     <?php
@@ -34,7 +34,7 @@ function my_custom_modal_script() {
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.7);
             /* padding-top: 60px; */
-            display: flex;
+/*            display: flex;*/
             align-items: center;
             justify-content: center;
         }
@@ -177,14 +177,14 @@ function my_custom_modal_script() {
             // Close the modal when the user clicks on the close button (x)
             span.onclick = function () {
             modal.style.display = "none";
-            // setCookie(cookieName, "true", 30);
+             setCookie(cookieName, "true", 30);
             };
 
             // Close the modal when the user clicks anywhere outside of the modal
             window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-                // setCookie(cookieName, "true", 30);
+                setCookie(cookieName, "true", 30);
             }
             };
         });
@@ -198,7 +198,7 @@ function my_custom_modal_script() {
             setCookie(cookieName1, "true", 30);
             setTimeout(function () {
             modal.style.display = "none";
-            }, 6000);
+            }, 3000);
         });
         </script>
 

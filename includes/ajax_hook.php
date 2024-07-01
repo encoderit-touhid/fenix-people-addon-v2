@@ -13,3 +13,8 @@ add_action('wp_ajax_fenix_people_message_by_admin', array('fenix_people_admin_fu
 
 add_action('wp_ajax_encoder_it_set_payment_keys', array('fenix_people_admin_functionalities','encoder_it_set_payment_keys'));
 
+/******* New Update */
+
+add_action('wp_ajax_fenix_people_message_by_user_with_subject', array('message_inbox_functionalities','fenix_people_message_by_user_with_subject'));
+
+add_action('wp_ajax_fenix_people_message_by_admin_with_subject', array('message_inbox_functionalities','fenix_people_message_by_admin_with_subject'));

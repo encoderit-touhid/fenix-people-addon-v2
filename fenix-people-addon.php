@@ -28,13 +28,17 @@
  require_once( dirname( __FILE__ ).'/includes/ajax_hook.php' );
  require_once( dirname( __FILE__ ).'/includes/admin_pages.php' );
  require_once( dirname( __FILE__ ).'/includes/helpers.php' );
- require_once( dirname( __FILE__ ).'/includes/woocommer-hooks.php');
+ //require_once( dirname( __FILE__ ).'/includes/woocommer-hooks.php');
  require_once( dirname( __FILE__ ).'/includes/service_request_customer.php');
  //require_once( dirname( __FILE__ ).'/includes/custom_routes.php');
  require_once( dirname( __FILE__ ).'/includes/user_functionalities.php');
-
+ // New requirements
  require_once( dirname( __FILE__ ).'/includes/pop_up_html.php');
  
+ require_once( dirname( __FILE__ ).'/includes/woocommerce-new-hooks.php');
+
+ require_once( dirname( __FILE__ ).'/includes/message_inbox_functionalities.php');
+
  register_activation_hook(__FILE__,'activation_callback_function');
  function activation_callback_function()
  {
