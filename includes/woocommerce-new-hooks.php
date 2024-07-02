@@ -62,3 +62,23 @@ function woocommerce_account_send_user_details_message_add_endpoint() {
  
 }
 
+/*** Financial Reports response */
+
+add_action( 'init', 'financial_report_user_add_endpont' );
+function financial_report_user_add_endpont() {
+   
+    // Check WP_Rewrite
+    add_rewrite_endpoint( 'financial-report-list-to-user', EP_PAGES );
+ 
+}
+/*
+ * Step 3. Content for the new page in My Account, woocommerce_account_{ENDPOINT NAME}_endpoint
+ */
+add_action( 'woocommerce_account_financial-report-list-to-user_endpoint', 'financial_report_list_to_user' );
+function financial_report_list_to_user() {
+ 
+    // Content for new page
+    include(dirname( __FILE__ ).'/public/financial_report/index.php');
+
+ 
+}

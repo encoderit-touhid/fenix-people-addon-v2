@@ -8,7 +8,7 @@
 
     });
    
-    jQuery('.adding_financial_report_modal').on('click',function(e){
+    jQuery(document).on('click','.adding_financial_report_modal',function(e){
        e.preventDefault();
        jQuery('#user_id_to_report').val(jQuery(this).data('user_id'));
        jQuery('#createModal').modal('show');
@@ -72,9 +72,14 @@
                                 icon: 'success',
                                 text: 'Uploaded files are successfully stored and the client will get an email about it',
                                 showConfirmButton: false,
-                                // timer: 2500
+                                 timer: 2500
                             })
-                            
+                            jQuery('#sent_status_'+jQuery('#user_id_to_report').val()).text("Sent");
+                            jQuery('#created_status_'+jQuery('#user_id_to_report').val()).text(obj.created_at);
+                            jQuery('#report_title').val("");
+                            jQuery('#report_content').val("");
+                            jQuery('#file_adding_div').empty();
+                            jQuery('#createModal').modal('hide');
                         }
                         if(obj.success == "error")
                         {

@@ -93,11 +93,11 @@ if(!function_exists('get_the_financial_report_sent_status'))
         global $wpdb;
         $encoderit_fenix_people_financial_report = $wpdb->prefix . 'encoderit_fenix_people_financial_report';
         $get_client_user_name="SELECT * FROM " . $encoderit_fenix_people_financial_report . "
-        where user_id=$user_id";
+        where user_id=$user_id order by id desc";
         
         $get_client_user_name=$wpdb->get_row($get_client_user_name);
         
-        return !empty($get_client_user_name);  
+        return $get_client_user_name;  
         
      }
 }

@@ -29,6 +29,7 @@ class manage_financial_report
                 'report_file' => self::save_files_by_admin(),
                 'report_title' => $_POST['report_title'],
                 'report_content'=>$_POST['report_content'],
+                'user_id'=>$_POST['user_id'],
                 'created_at' => date('Y-m-d H:i:s'),
             );
              
@@ -40,6 +41,7 @@ class manage_financial_report
 
                     echo  json_encode([
                         'success' => 'success',
+                        'created_at' => date('Y-m-d H:i:s'),
                         'message'=>'Form Submmited Successfully'
                     ]);
                 }else
@@ -135,5 +137,9 @@ class manage_financial_report
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 		wp_mail($to, $subject, $message, $headers);
+    }
+    public static function fenix_people_financial_report_admin_report_list_by_user()
+    {
+        require_once( dirname( __FILE__ ).'/admin_view/financial_report/report_by_user_list.php' );
     }
 }

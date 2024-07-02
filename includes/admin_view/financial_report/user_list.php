@@ -13,6 +13,7 @@ $users = $user_query->get_results();
             <td>SL.</td>
             <td>User Name</td>
             <td>Sent Status</td>
+            <td>Last Sent</td>
             <td>Control</td>
         </tr>
     </thead>
@@ -20,13 +21,15 @@ $users = $user_query->get_results();
         <?php 
         foreach($users as $key=>$value)
         {
+            $get_the_financial_report_sent_status=get_the_financial_report_sent_status($value->ID)
            ?>
            <tr>
             <td><?php echo $key+1?></td>
             <td><?php echo $value->display_name?></td>
-            <td id="sent_status_<?php echo $value->ID?>"><?php echo get_the_financial_report_sent_status($value->ID) ? "Sent" :"Not sent any"?></td>
+            <td id="sent_status_<?php echo $value->ID?>"><?php echo !empty($get_the_financial_report_sent_status) ? "Sent" :"Not sent any"?></td>
+            <td id="created_status_<?php echo $value->ID?>"><?php echo !empty($get_the_financial_report_sent_status->created_at) ? $get_the_financial_report_sent_status->created_at :" " ?></td>
             <td>
-                <a href="" class="btn btn-primary" data-user_id="<?=$value->ID?>">Details</a>
+                <a href="<?php echo admin_url() .'admin.php?page=fenix-people-financial-report-admin-report-list-by-user&id='.$value->ID ?>" class="btn btn-primary view_financial_report_modal" data-user_id="<?=$value->ID?>">Details</a>
                 <a href="" class="btn btn-secondary adding_financial_report_modal" data-user_id="<?=$value->ID?>">Add</a>
             </td>
            </tr>
@@ -60,6 +63,9 @@ $users = $user_query->get_results();
         </div>
     </div>
 </div>
+
+
+
 
 <?php
 include_once( dirname( __FILE__ ).'/financial_report_css.php');
