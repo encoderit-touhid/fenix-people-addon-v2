@@ -69,3 +69,35 @@ if(!function_exists('get_the_last_form_id_by_user'))
 
 
 
+if(!function_exists('enc_get_client_name_by_message_subject'))
+{
+    function enc_get_client_name_by_message_subject($subject_id)
+    {
+        global $wpdb;
+        $encoderit_fenix_people_chats = $wpdb->prefix . 'encoderit_fenix_people_chats';
+        $get_client_user_name="SELECT * FROM " . $encoderit_fenix_people_chats . "
+        where subject_id=$subject_id";
+        
+        $get_client_user_name=$wpdb->get_row($get_client_user_name);
+        
+        $client_id=$get_client_user_name->sender_id == 1 ? $get_client_user_name->receiver_id :$get_client_user_name->sender_id;  
+        
+       return  get_user_by('ID',$client_id)->display_name; 
+    }
+}
+
+if(!function_exists('get_the_financial_report_sent_status'))
+{   
+     function get_the_financial_report_sent_status($user_id)
+     {
+        global $wpdb;
+        $encoderit_fenix_people_financial_report = $wpdb->prefix . 'encoderit_fenix_people_financial_report';
+        $get_client_user_name="SELECT * FROM " . $encoderit_fenix_people_financial_report . "
+        where user_id=$user_id";
+        
+        $get_client_user_name=$wpdb->get_row($get_client_user_name);
+        
+        return !empty($get_client_user_name);  
+        
+     }
+}

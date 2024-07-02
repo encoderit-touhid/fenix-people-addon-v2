@@ -20,11 +20,17 @@
     
     add_submenu_page('options.php', 'Fenix People Message Details', 'Fenix People Message Details', 'manage_options', 'fenix-people-messages-admin-inbox-details-view', array( 'message_inbox_functionalities', 'message_inbox_functionalities_admin_single_user_index' ));
 
-    add_options_page(
-      'Fenix People Payment Gateway',        // Page title
-      'Fenix People Payment Gateway',        // Menu title
-      'manage_options',         // Capability required to access the page
-      'fenix-people-payment-gateway',   // Menu slug (unique identifier)
-      array( 'fenix_people_admin_functionalities', 'fenix_people_payment_gateway' ));
+    // add_options_page(
+    //   'Fenix People Payment Gateway',        // Page title
+    //   'Fenix People Payment Gateway',        // Menu title
+    //   'manage_options',         // Capability required to access the page
+    //   'fenix-people-payment-gateway',   // Menu slug (unique identifier)
+    //   array( 'fenix_people_admin_functionalities', 'fenix_people_payment_gateway' ));
 
+
+    add_menu_page('Fenix People Financial report', 'Fenix People Financial report', 'manage_options', 'fenix-people-financial-report-admin',array( 'manage_financial_report', 'user_list_admin' ), 'dashicons-admin-generic', 4);
+
+    // add_submenu_page('options.php', 'Fenix People Message Details', 'Fenix People Message Details', 'manage_options', 'fenix-people-messages-admin-details-view', array( 'fenix_people_admin_functionalities', 'fenix_people_messages_admin_details_view' ));
+    
+    add_submenu_page('options.php', 'Fenix People Message Details', 'Fenix People Message Details', 'manage_options', 'fenix-people-messages-admin-inbox-details-view', array( 'message_inbox_functionalities', 'message_inbox_functionalities_admin_single_user_index' ));
  }

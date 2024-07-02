@@ -39,6 +39,8 @@
 
  require_once( dirname( __FILE__ ).'/includes/message_inbox_functionalities.php');
 
+ require_once( dirname( __FILE__ ).'/includes/manage_financial_report.php');
+
  register_activation_hook(__FILE__,'activation_callback_function');
  function activation_callback_function()
  {

@@ -36,3 +36,29 @@ function custom_my_account_menu_items_send_user_message( $items ) {
   // return $items;
 }
 add_filter( 'woocommerce_account_menu_items', 'custom_my_account_menu_items_send_user_message', );
+
+
+
+/*** Chat Single response */
+
+ 
+
+add_action( 'init', 'send_user_message_details_add_endpont' );
+function send_user_message_details_add_endpont() {
+   
+    // Check WP_Rewrite
+    add_rewrite_endpoint( 'send-user-details-message', EP_PAGES );
+ 
+}
+/*
+ * Step 3. Content for the new page in My Account, woocommerce_account_{ENDPOINT NAME}_endpoint
+ */
+add_action( 'woocommerce_account_send-user-details-message_endpoint', 'woocommerce_account_send_user_details_message_add_endpoint' );
+function woocommerce_account_send_user_details_message_add_endpoint() {
+ 
+    // Content for new page
+    include(dirname( __FILE__ ).'/public/send_new_message/message-details.php');
+
+ 
+}
+

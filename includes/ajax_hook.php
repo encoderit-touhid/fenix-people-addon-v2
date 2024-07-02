@@ -18,3 +18,6 @@ add_action('wp_ajax_encoder_it_set_payment_keys', array('fenix_people_admin_func
 add_action('wp_ajax_fenix_people_message_by_user_with_subject', array('message_inbox_functionalities','fenix_people_message_by_user_with_subject'));
 
 add_action('wp_ajax_fenix_people_message_by_admin_with_subject', array('message_inbox_functionalities','fenix_people_message_by_admin_with_subject'));
+
+
+add_action('wp_ajax_admin_financial_report_submit', array('manage_financial_report','admin_financial_report_submit'));

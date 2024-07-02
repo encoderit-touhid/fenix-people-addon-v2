@@ -1,5 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+<style href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"></style>
 <script>
     jQuery('.entry-title').text('Message')
     jQuery('#send_message_by_user_btn').on('click', function(e) {
@@ -8,13 +10,24 @@
     let message_subject = jQuery('#message_subject').val();
     let files=document.getElementById("send_message_by_user_file").files[0];
    
-    if (!message && !message_subject && files === undefined) {
+    if (files === undefined && (!message_subject || !message)) {
+       
+            Swal.fire({
+            title: "Please Add Subject and Message",
+            icon: "warning"
+            });
+           return;
+        
+        
+    }else if(files && !message_subject)
+    {
         Swal.fire({
             title: "Please Add Subject and Message",
             icon: "warning"
             });
-        return;
-    } else {
+           return;
+    }
+    else {
         
         var formdata = new FormData();
         formdata.append('message', message);
@@ -82,4 +95,7 @@ jQuery('#send_message_by_user_file_icon').on('click',function(e){
     jQuery('#send_message_by_user').val('');
     jQuery('#send_message_by_user_file').val('');
 })
+jQuery('#request_service_client').DataTable({
+		 
+        });
 </script>

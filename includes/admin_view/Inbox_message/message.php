@@ -12,8 +12,9 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . "  ORDER BY id DES
                 <tr>
                     <td>ID</td>
                     <td>Subject</td>
+                    <td>User</td>
                     <td>Details</td>
-                    <td>Created At</td>
+                    <td>Created at</td>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +26,7 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . "  ORDER BY id DES
                     <tr>
                         <td>#<?=$value->id?></td>
                         <td><?=$value->subject?></td>
+                        <td><?=enc_get_client_name_by_message_subject($value->id)?></td>
                         <td><a  href="<?=$view_link?>" class="button"  style="background-color: #009B00;color: black">Details</a></td>
                         <td><?=$value->created_at?></td>
                     </tr>

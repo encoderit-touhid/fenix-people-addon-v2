@@ -13,6 +13,8 @@ class message_inbox_functionalities
 
      public static function fenix_people_message_by_user_with_subject()
      {
+        //var_dump($_POST);
+        //exit;
       if (!wp_verify_nonce($_POST['nonce'], 'fenix_people_message_by_user_with_subject')) {
          echo json_encode([
              'success' => 'error',
@@ -20,8 +22,19 @@ class message_inbox_functionalities
          ]);
      }else
      {
+         $admin_notify_id=null;
          $message=$_POST['message'];
-         $message_subject=$_POST['message_subject'];
+         $message_subject=null;
+         $subject_id=null;
+         $is_new_subject=false;
+         if(isset($_POST['message_subject']) && !empty($_POST['message_subject']))
+         {
+            $message_subject=$_POST['message_subject'];
+            $is_new_subject=true;
+         }elseif(isset($_POST['subject_id']) && !empty($_POST['subject_id']))
+         {
+            $subject_id=$_POST['subject_id'];
+         }
          $is_file=0;
          $file_url=null;
          if(!empty($_FILES))
@@ -33,19 +46,48 @@ class message_inbox_functionalities
             $is_file=1;
          }
          global $wpdb;
-         $table_name = $wpdb->prefix . 'encoderit_fenix_people_chats';
+         if($is_new_subject)
+         {
+            $wpfenix_encoderit_fenix_people_chat_subjects=$wpdb->prefix . 'encoderit_fenix_people_chat_subjects';
+            $data = array(
+                "subject" => $message_subject,
+                "created_at" => date('Y-m-d H:i:s'),
+              );
+             $wpdb->insert($wpfenix_encoderit_fenix_people_chat_subjects, $data);
+             $lastid = $wpdb->insert_id;
+             $admin_notify_id=$lastid;
+             $table_name = $wpdb->prefix . 'encoderit_fenix_people_chats';
 
-         $data = array(
-             "sender_id" => wp_get_current_user()->ID,
-             "receiver_id" => 1,
-             "subject" => $message_subject,
-             "message" => $message,
-             "is_file" => $is_file,
-             "created_at" => date('Y-m-d H:i:s'),
-           );
-          $wpdb->insert($table_name, $data);
+             $data = array(
+                "sender_id" => wp_get_current_user()->ID,
+                "receiver_id" => 1,
+                "subject_id" => $lastid,
+                "message" => $message,
+                "is_file" => $is_file,
+                "created_at" => date('Y-m-d H:i:s'),
+              );
+             $wpdb->insert($table_name, $data);
+         }else
+         {
+            $table_name = $wpdb->prefix . 'encoderit_fenix_people_chats';
 
-          self::message_notification_to_admin();
+            $data = array(
+               "sender_id" => wp_get_current_user()->ID,
+               "receiver_id" => 1,
+               "subject_id" => $subject_id,
+               "message" => $message,
+               "is_file" => $is_file,
+               "created_at" => date('Y-m-d H:i:s'),
+             );
+            $wpdb->insert($table_name, $data);
+            $admin_notify_id=$subject_id;
+         }
+
+         
+
+        
+
+          self::message_notification_to_admin($admin_notify_id);
           echo json_encode([
              'success' => 'success',
              'file_url'=>$file_url
@@ -55,12 +97,12 @@ class message_inbox_functionalities
      }
      wp_die();    
      }
-     public static function message_notification_to_admin()
+     public static function message_notification_to_admin($admin_notify_id)
      {
           $to = get_option('admin_email');
   
           $subject = 'Message sent from ' . ' (' . wp_get_current_user()->display_name . ')';
-          $view_message_link=admin_url() .'admin.php'. '?page=fenix-people-messages-admin-details-view&id=' . wp_get_current_user()->ID;
+          $view_message_link=admin_url() .'admin.php'. '?page=fenix-people-messages-admin-inbox-details-view&id=' . $admin_notify_id;
   
           $message = '<p>To view Message click below</p>';
   
@@ -144,7 +186,7 @@ class message_inbox_functionalities
                  "created_at" => date('Y-m-d H:i:s'),
                );
               $wpdb->insert($table_name, $data);
-              self::message_notification_to_user();
+              self::message_notification_to_user($_POST['subject_id']);
               echo json_encode([
                  'success' => 'success',
                  'file_url'=>$file_url
@@ -154,13 +196,13 @@ class message_inbox_functionalities
        wp_die(); 
  
      }
-     public static function message_notification_to_user()
+     public static function message_notification_to_user($subject_id)
      {
           $to = get_user_by('ID', $_POST['receiver_id'])->user_email;
   
           $subject = 'Message sent from ' . ' (' . wp_get_current_user()->display_name . ')';
           //'/my-account/send-user-message/';
-          $view_message_link=site_url(). '/my-account/send-user-message/';
+          $view_message_link=site_url(). '/my-account/send-user-details-message/?id='.$subject_id;
   
           $message = '<p>To view Message click below</p>';
   
