@@ -4,7 +4,7 @@
 <style href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"></style>
 <script>
      jQuery('#financial_report_by_user').DataTable({
-          order:[[2,"asc"]]
+          order:[[1,"asc"]]
     });
 jQuery('.entry-title').text('Payment History');
 </script>
