@@ -36,6 +36,7 @@
     background-color: transparent;
     background-image: linear-gradient(90deg, #313fa0 50%, #313fa0 50%);
   }
+  .btn.btn-primary,
   table.dataTable .btn.btn-primary {
     background-color: #313fa0 !important;
     border: solid 1px #313fa0 !important;
@@ -45,4 +46,38 @@
     font-size: 16px !important;
     font-weight: 400 !important;
   }
+  #report_content{
+    min-height: 220px;
+  }
+  #report_title{
+    height: 45px;
+  }
+  #report_content,
+  #report_title{
+    border: 1px solid #8c8f94;
+  }
+  #report_content:focus,
+  #report_title:focus{
+    box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+    
+  }
+  .removefile{
+    box-shadow: none;
+    border: 1px solid #8c8f94;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+  }
+  .file_item {
+    display: flex;
+    width: max-content;
+    max-width: 100%;
+}
+.file_item:not(:last-child){
+  margin-bottom: 15px;
+}
 </style>

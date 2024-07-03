@@ -36,6 +36,7 @@
     background-color: transparent;
     background-image: linear-gradient(90deg, #313fa0 50%, #313fa0 50%);
   }
+  .btn.btn-primary ,
   table.dataTable .btn.btn-primary {
     background-color: #313fa0 !important;
     border: solid 1px #313fa0 !important;
