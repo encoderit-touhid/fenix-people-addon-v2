@@ -64,21 +64,37 @@ function woocommerce_account_send_user_details_message_add_endpoint() {
 
 /*** Financial Reports response */
 
-add_action( 'init', 'financial_report_user_add_endpont' );
-function financial_report_user_add_endpont() {
+add_action( 'init', 'user_financial_report_endpoint' );
+function user_financial_report_endpoint() {
    
     // Check WP_Rewrite
-    add_rewrite_endpoint( 'financial-report-list-to-user', EP_PAGES );
+    add_rewrite_endpoint( 'user-financial-report', EP_PAGES );
  
 }
 /*
  * Step 3. Content for the new page in My Account, woocommerce_account_{ENDPOINT NAME}_endpoint
  */
-add_action( 'woocommerce_account_financial-report-list-to-user_endpoint', 'financial_report_list_to_user' );
-function financial_report_list_to_user() {
+add_action( 'woocommerce_account_user-financial-report_endpoint', 'user_financial_report' );
+function user_financial_report() {
  
     // Content for new page
     include(dirname( __FILE__ ).'/public/financial_report/index.php');
 
  
 }
+
+function custom_my_account_menu_items_financial_report( $items ) {
+    $new_items = array();
+    // Loop throu menu items
+    foreach( $items as $key => $item ){
+        if( 'orders' == $key )
+            $new_items['user-financial-report'] = __( 'Financial Report', 'woocommerce');
+  
+        $new_items[$key] = $item;
+    }
+    return $new_items;
+  
+    // $items['submitted-service-request'] = __( 'Submitted Service Request', 'woocommerce');
+    // return $items;
+  }
+  add_filter( 'woocommerce_account_menu_items', 'custom_my_account_menu_items_financial_report', );

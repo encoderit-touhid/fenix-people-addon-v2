@@ -4,7 +4,7 @@
  $encoderit_fenix_people_financial_report = $wpdb->prefix . 'encoderit_fenix_people_financial_report';
 
 
- $user_id=$_GET['id'];
+ $user_id=get_current_user_id();
  if(empty($user_id))
  {
     echo "404 not allowed";
@@ -84,8 +84,8 @@ if(empty($get_client_user_name))
 
 
 <?php
-include_once( dirname( __FILE__ ).'/financial_report_report_list_by_user_css.php');
-include_once( dirname( __FILE__ ).'/financial_report_report_list_by_user_js.php');
+include_once( dirname( __FILE__ ).'/financial_report_report_list_to_user_css.php');
+include_once( dirname( __FILE__ ).'/financial_report_report_list_to_user_js.php');
 
 
 
