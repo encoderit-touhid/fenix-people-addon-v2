@@ -126,11 +126,11 @@ class manage_financial_report
 
 		$subject = 'Admin Upload Financial Report ' . ' (' . $subscriber->display_name . ')';
         
-        $view_service_request_link=site_url() .'/my-account/submitted-service-request-single-view/?form_id='.base64_encode($user_id) ;
+        $view_service_request_link=site_url() .'/my-account/user-financial-report' ;
 
-		$message = '<p>Admin Upload Financial Report , Please Collect them </p>';
+		$message = '<p>Admin Upload Financial Report , Please Collect them from your profile</p>';
         
-        $message .= '<p>To view Report click below</p>';
+        $message .= '<p>To View Report click below</p>';
         $message .= '<a href="'.$view_service_request_link.'">Click Here</a>';
 
 		$headers = "MIME-Version: 1.0" . "\r\n";

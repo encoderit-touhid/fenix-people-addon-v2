@@ -101,3 +101,42 @@ if(!function_exists('get_the_financial_report_sent_status'))
         
      }
 }
+
+if(!function_exists('get_the_current_plan_name_by_user_id'))
+{   
+     function get_the_current_plan_name_by_user_id($user_id)
+     {
+        
+        $arm_user_last_plan=get_user_meta($user_id,'arm_user_last_plan', true);
+        if(empty($arm_user_last_plan))
+        {
+           return "-";
+        }else
+        {
+            $plan_key='arm_user_plan_'.$arm_user_last_plan;
+            $plaun_data=get_user_meta($user_id,$plan_key, true);
+            return !empty($plaun_data['arm_current_plan_detail']['arm_subscription_plan_name']) ? $plaun_data['arm_current_plan_detail']['arm_subscription_plan_name'] : " ";
+        }
+        
+        
+     }
+}
+
+
+if(!function_exists('get_arm_subscription_plans_by_id'))
+{   
+     function get_arm_subscription_plans_by_id($plan_id)
+     {
+        
+        global $wpdb;
+        $arm_subscription_plans = $wpdb->prefix . 'arm_subscription_plans';
+        $get_arm_subscription_plans="SELECT * FROM " . $arm_subscription_plans . "
+        where arm_subscription_plan_id=$plan_id";
+        
+        $get_arm_subscription_plans=$wpdb->get_row($get_arm_subscription_plans);
+        
+        return !empty($get_arm_subscription_plans) ? $get_arm_subscription_plans->arm_subscription_plan_name : " ";  
+        
+     }
+}
+
