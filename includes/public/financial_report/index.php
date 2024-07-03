@@ -23,62 +23,64 @@ if(empty($get_client_user_name))
 
 ?>
 
-<table id="financial_report_by_user">
-    <thead>
-        <tr>
-            <th>SL.</th>
-            <th>Report Title</th>
-            <th>Message (if any)</th>
-            <th>Show Files</th>
-            <th>Report Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php 
-        foreach($get_client_user_name as $key=>$value)
-        {
-            $download_button_tag=null;
-            $files_by_admin=json_decode($value->report_file,true);
-           
-              $is_ssl=false;
-              if(str_contains(site_url(), 'https'))
-               {
-                  $is_ssl=true;
-               }
-              $files=[];
-              
-              foreach ($files_by_admin as $file) {
-                  if($is_ssl)
-                  {
+<div class="enc-white">
+    <table id="financial_report_by_user">
+        <thead>
+            <tr>
+                <th>SL.</th>
+                <th>Report Title</th>
+                <th>Message (if any)</th>
+                <th>Show Files</th>
+                <th>Report Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            foreach($get_client_user_name as $key=>$value)
+            {
+                $download_button_tag=null;
+                $files_by_admin=json_decode($value->report_file,true);
+            
+                $is_ssl=false;
+                if(str_contains(site_url(), 'https'))
+                {
+                    $is_ssl=true;
+                }
+                $files=[];
+                
+                foreach ($files_by_admin as $file) {
+                    if($is_ssl)
+                    {
 
-                      $file_path = str_replace("http://","https://",wp_upload_dir()['baseurl'].$file['paths']);
-                  }else
-                  {
-                      $file_path = wp_upload_dir()['baseurl'].$file['paths'];
-                  }
-                  array_push($files,$file_path);
-              }
-              $case_id=$value->id;
-              $a=implode(',',$files);
-           
-              $file_name_string='#'.$case_id.'-'.date('Y-m-d-H-i-s').'-'.$value->user_id;
-              $id="user_id_enc_don_".$case_id;
-              $download_button_tag='<a href="#" class="btn btn-primary"  data-case="'.$case_id.'" data-name="'.$file_name_string.'"   data-file="'.$a.'" id="'.$id.'" onclick="enc_download(this.id)">Download ZIP</a>';
+                        $file_path = str_replace("http://","https://",wp_upload_dir()['baseurl'].$file['paths']);
+                    }else
+                    {
+                        $file_path = wp_upload_dir()['baseurl'].$file['paths'];
+                    }
+                    array_push($files,$file_path);
+                }
+                $case_id=$value->id;
+                $a=implode(',',$files);
+            
+                $file_name_string='#'.$case_id.'-'.date('Y-m-d-H-i-s').'-'.$value->user_id;
+                $id="user_id_enc_don_".$case_id;
+                $download_button_tag='<a href="#" class="btn btn-primary"  data-case="'.$case_id.'" data-name="'.$file_name_string.'"   data-file="'.$a.'" id="'.$id.'" onclick="enc_download(this.id)">Download ZIP</a>';
 
-              
-           ?>
-           <tr>
-            <td><?php echo $key+1?></td>
-            <td><?php echo $value->report_title?></td>
-            <td><?php echo $value->report_content?></td>
-            <td><?php echo $download_button_tag?></td>
-            <td><?php echo $value->created_at?></td>
-           </tr>
-           <?php     
-        }
-        ?>
-    </tbody>
-</table>
+                
+            ?>
+            <tr>
+                <td><?php echo $key+1?></td>
+                <td><?php echo $value->report_title?></td>
+                <td><?php echo $value->report_content?></td>
+                <td><?php echo $download_button_tag?></td>
+                <td><?php echo $value->created_at?></td>
+            </tr>
+            <?php     
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
 
 
 
