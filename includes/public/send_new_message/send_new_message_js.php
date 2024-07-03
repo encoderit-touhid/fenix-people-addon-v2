@@ -98,4 +98,15 @@ jQuery('#send_message_by_user_file_icon').on('click',function(e){
 jQuery('#request_service_client').DataTable({
 		 
         });
+
+jQuery('#inbox-tab').on('click',function(){
+  jQuery('#send_message_h2').hide();
+  jQuery('#inbox_h2').show();
+
+});    
+jQuery('#send-message-tab').on('click',function(){
+  jQuery('#send_message_h2').show();
+  jQuery('#inbox_h2').hide();
+
+});      
 </script>

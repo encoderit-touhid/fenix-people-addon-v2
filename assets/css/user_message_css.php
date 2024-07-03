@@ -86,6 +86,7 @@
   width: 100%;
   position: relative;
 }
+.admin_mesage_send_cont input[type=file],
 .admin_mesage_send_cont input {
   box-sizing: border-box;
   width: 100%;
@@ -93,7 +94,7 @@
   outline: none;
   height: 50px;
   border-radius: 30px;
-  padding: 8px 20px;
+  padding: 8px 60px;
   padding-right: 60px;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -125,11 +126,13 @@
   max-height: 19px;
   margin-top: 3px;
 }
+.admin_mesage_send_cont input[type=file],
 .admin_mesage_send_cont input::placeholder {
   color: rgba(0, 0, 0, 0.4);
   opacity: 1;
 }
 
+.admin_mesage_send_cont input[type=file],
 .admin_mesage_send_cont input::-ms-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -137,12 +140,30 @@
 
 #send_message_by_user_file_icon
 {
-    color: #262626;
+   /*  color: #262626;
     position: absolute;
     left: 7px;
     top: 16px;
     margin-right: 23px;
-    cursor:pointer
+    cursor:pointer */
+}
+#send_message_by_user_file_icon {
+    color: #262626;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    margin-right: 23px;
+    cursor: pointer;
+    font-size: 18px;
+    transform: translatey(-50%);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    height: 33px;
+    width: 33px;
+    min-width: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 ::-ms-input-placeholder { /* Edge 12-18 */
@@ -160,5 +181,7 @@
 {
   color: #262626 !important;
 }
-
+.dt-length .dt-input{
+  min-width: 50px;
+}
 </style>

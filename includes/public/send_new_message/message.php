@@ -1,6 +1,8 @@
-<div class="">
-<div class=" mt-4">
+<div class="send_user_message_cont">
+<div class="enc-white mt-4">
     <div class="row">
+      <h2 class="display-5 fw-bold text-center text-primary" id="send_message_h2" style="display: none;">Send Message</h2>
+      <h2 class="display-5 fw-bold text-center text-primary" id="inbox_h2">Inbox</h2>
       <div class="col-md-3">
         <ul class="nav nav-tabs flex-column" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -14,19 +16,19 @@
       <div class="col-md-9">
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="inbox" role="tabpanel" aria-labelledby="inbox-tab">
-            <h4>Inbox</h4>
+            <!-- <h2 class="text-center text-primary">Inbox</h2> -->
             <?php include_once(dirname( __FILE__ ).'/message_table.php')?>
           </div>
           <div class="tab-pane fade" id="send-message" role="tabpanel" aria-labelledby="send-message-tab">
-            <h2 class="text-center text-primary">Send Message</h2>
+            <!-- <h2 class="text-center text-primary">Send Message</h2> -->
             <form action="">
               <label for="" class="form-label text-primary">Subject</label>
-              <input type="text" class="mb-5" name="subject" id="message_subject">
+              <input type="text" placeholder="Type the subject here" class="mb-5" name="subject" id="message_subject">
               <div class="admin_mesage_send_cont">
                 <!-- <label for="">Send Message</label> -->
                 <i class="fa fa-file icon" id="send_message_by_user_file_icon"></i>
                 <input type="file" id="send_message_by_user_file"/>
-                <input type="text" id="send_message_by_user" placeholder=" Select file or text mode by click on file icon">
+                <input type="text" id="send_message_by_user" placeholder="Select file or text mode by click on file icon">
                 <button id="send_message_by_user_btn">
                   <img src="<?php echo esc_url(MY_PLUGIN_URL . 'assets/images/send_icon.png'); ?>" alt="Send Message">
                 </button>

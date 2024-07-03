@@ -14,12 +14,12 @@ $result=$wpdb->get_results($sql);
 <div class="enc-white">
 <div class="request_service_table_contianer">
     <table id="request_service_client">
-        <thead>
+        <thead class="bg-white">
             <tr>
-                <td>ID</td>
-                <td>Subject</td>
-                <td>Details</td>
-                <td>Created at</td>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Details</th>
+                <th>Created at</th>
             </tr>
         </thead>
         <tbody>

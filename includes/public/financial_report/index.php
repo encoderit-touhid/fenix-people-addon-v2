@@ -26,11 +26,11 @@ if(empty($get_client_user_name))
 <table id="financial_report_by_user">
     <thead>
         <tr>
-            <td>SL.</td>
-            <td>Report Title</td>
-            <td>Message (if any)</td>
-            <td>Show Files</td>
-            <td>Report Date</td>
+            <th>SL.</th>
+            <th>Report Title</th>
+            <th>Message (if any)</th>
+            <th>Show Files</th>
+            <th>Report Date</th>
         </tr>
     </thead>
     <tbody>

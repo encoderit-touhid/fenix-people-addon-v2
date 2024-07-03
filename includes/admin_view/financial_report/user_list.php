@@ -6,15 +6,15 @@ $user_query = new WP_User_Query( array(
 
 $users = $user_query->get_results();
 ?>
-<div class="container">
-<table id="financial_document_admin">
+<div class="full_width pe_20">
+<table id="financial_document_admin" class="full_width">
     <thead>
         <tr>
-            <td>SL.</td>
-            <td>User Name</td>
-            <td>Sent Status</td>
-            <td>Last Sent</td>
-            <td>Control</td>
+            <th>SL.</th>
+            <th>User Name</th>
+            <th>Sent Status</th>
+            <th>Last Sent</th>
+            <th>Control</th>
         </tr>
     </thead>
     <tbody>

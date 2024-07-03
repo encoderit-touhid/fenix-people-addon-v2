@@ -6,15 +6,15 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . "  ORDER BY id DES
 
 ?>
 <div class="enc-white">
-    <div class="request_service_table_contianer">
-        <table id="request_service_client">
+    <div class="request_service_table_contianer full_width pe_20">
+        <table id="request_service_client" class="full_width">
             <thead>
                 <tr>
-                    <td>ID</td>
-                    <td>Subject</td>
-                    <td>User</td>
-                    <td>Details</td>
-                    <td>Created at</td>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>User</th>
+                    <th>Details</th>
+                    <th>Created at</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . "  ORDER BY id DES
                         <td>#<?=$value->id?></td>
                         <td><?=$value->subject?></td>
                         <td><?=enc_get_client_name_by_message_subject($value->id)?></td>
-                        <td><a  href="<?=$view_link?>" class="button"  style="background-color: #009B00;color: black">Details</a></td>
+                        <td><a  href="<?=$view_link?>" class="btn btn-primary button"  style="background-color: #009B00;color: black">Details</a></td>
                         <td><?=$value->created_at?></td>
                     </tr>
                     <?php
