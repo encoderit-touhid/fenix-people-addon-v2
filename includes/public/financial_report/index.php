@@ -15,11 +15,11 @@
  
  $get_client_user_name=$wpdb->get_results($get_client_user_name);
  
-if(empty($get_client_user_name))
-{
-    echo "404 not allowed";
-    exit;
-}  
+// if(empty($get_client_user_name))
+// {
+//     echo "404 not allowed";
+//     exit;
+// }  
 
 ?>
 
