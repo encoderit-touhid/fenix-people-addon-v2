@@ -12,6 +12,8 @@ class fenix_people_create_custom_table
         self::create_encoderit_fenix_people_services_table();
         self::create_encoderit_encoderit_fenix_people_form_table();
         self::create_encoderit_fenix_people_chats_table();
+        self::create_encoderit_encoderit_fenix_people_chat_subjects_table();
+        self::create_encoderit_fenix_people_financial_report_table();
         //self::create_encoderit_encoderit_fenix_people_table();
        //// self::create_encoderit_country_with_code_table();
        // self::create_encoderit_service_with_country_table();
@@ -99,17 +101,61 @@ class fenix_people_create_custom_table
         $table_name = $wpdb->prefix . 'encoderit_fenix_people_chats';
 
         $charset_collate = $wpdb->get_charset_collate();
+ 
+            $sql = "CREATE TABLE IF NOT EXISTS  $table_name (
+                `id` bigint NOT NULL AUTO_INCREMENT,
+                `sender_id` bigint NOT NULL,
+                `receiver_id` bigint NOT NULL,
+                `subject_id` int DEFAULT NULL,
+                `message` text NOT NULL,
+                `parent_id` bigint DEFAULT NULL,
+               `is_file` TINYINT NULL DEFAULT '0',
+               `created_at` datetime DEFAULT NULL, 
+                PRIMARY KEY (`id`)
+            ) $charset_collate;";
 
-        $sql = "CREATE TABLE IF NOT EXISTS  $table_name (
-           `id` bigint NOT NULL AUTO_INCREMENT,
-            `sender_id` bigint NOT NULL,
-            `receiver_id` bigint NOT NULL,
-            `message` text NOT NULL,
-            `parent_id` bigint DEFAULT NULL,
-            `is_file` TINYINT NULL DEFAULT '0', 
-            `created_at` datetime DEFAULT NULL,
-            PRIMARY KEY (`id`)
-        ) $charset_collate;";
+
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql );
+    }
+    public static function create_encoderit_encoderit_fenix_people_chat_subjects_table()
+    {
+        global $wpdb;
+         
+        $table_name = $wpdb->prefix . 'encoderit_fenix_people_chat_subjects';
+
+        $charset_collate = $wpdb->get_charset_collate();
+ 
+            $sql = "CREATE TABLE IF NOT EXISTS  $table_name (
+                `id` bigint NOT NULL AUTO_INCREMENT,
+                `subject` varchar(255) DEFAULT NULL,
+               `created_at` datetime DEFAULT NULL, 
+                PRIMARY KEY (`id`)
+            ) $charset_collate;";
+
+
+        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+        dbDelta( $sql );
+    }
+    public static function create_encoderit_fenix_people_financial_report_table()
+    {
+        global $wpdb;
+         
+        $table_name = $wpdb->prefix . 'encoderit_fenix_people_financial_report';
+
+        $charset_collate = $wpdb->get_charset_collate();
+ 
+            $sql = "CREATE TABLE IF NOT EXISTS  $table_name (
+                `id` bigint NOT NULL AUTO_INCREMENT,
+                `report_title` varchar(255) DEFAULT NULL,
+                `report_file`  JSON NULL DEFAULT NULL,
+                `report_content` TEXT NULL DEFAULT NULL,
+                `user_id` bigint NOT NULL,
+                `created_at` datetime DEFAULT NULL, 
+                PRIMARY KEY (`id`),
+                KEY `user_id` (`user_id`)
+            ) $charset_collate;";
+
 
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql );
