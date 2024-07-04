@@ -31,7 +31,7 @@ $result=$wpdb->get_results($sql);
                 <tr>
                     <td>#<?=$value->id?></td>
                     <td><?=$value->subject?></td>
-                    <td><a  href="<?=$view_link?>" class="button"  style="background-color: #009B00;color: black">Details</a></td>
+                    <td><a  href="<?=$view_link?>" class="button">Details</a></td>
                     <td><?=$value->created_at?></td>
                 </tr>
                 <?php

@@ -91,8 +91,7 @@
     font-size: 16px;
   } */
   /* .admin_mesage_send_cont input[type="file"], */
-  .admin_mesage_send_cont input,
-  input {
+  .admin_mesage_send_cont input {
     box-sizing: border-box;
     width: 100%;
     border: none;
