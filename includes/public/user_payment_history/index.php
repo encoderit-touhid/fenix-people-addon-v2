@@ -21,11 +21,11 @@
  //var_dump($arm_payment_log);
  //exit;
 
-if(empty($arm_payment_log))
-{
-    echo "404 not allowed";
-    exit;
-}  
+// if(empty($arm_payment_log))
+// {
+//     echo "404 not allowed";
+//     exit;
+// }  
 
 ?>
 
