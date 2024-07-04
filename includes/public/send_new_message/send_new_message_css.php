@@ -87,10 +87,10 @@
     width: 100%;
     position: relative;
   }
-  .admin_mesage_send_cont input[type="file"]{
+  /* .admin_mesage_send_cont input[type="file"]{
     font-size: 16px;
-  }
-  .admin_mesage_send_cont input[type="file"],
+  } */
+  /* .admin_mesage_send_cont input[type="file"], */
   .admin_mesage_send_cont input,
   input {
     box-sizing: border-box;
@@ -104,7 +104,7 @@
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
-  #send_message_by_user_btn {
+  /* #send_message_by_user_btn {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -124,14 +124,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
   #send_message_by_user_btn img {
     max-width: 19px;
     object-fit: contain;
     max-height: 19px;
     margin-top: 3px;
   }
-  .admin_mesage_send_cont input[type="file"],
+  /* .admin_mesage_send_cont input[type="file"],
    .send_user_message_cont input::placeholder {
     color: rgba(0, 0, 0, 0.4) !important;
     opacity: 1;
@@ -140,7 +140,7 @@
   .admin_mesage_send_cont input[type="file"],
   .send_user_message_cont input::-ms-input-placeholder {
     color: rgba(0, 0, 0, 0.4) !important;
-  }
+  } */
 
   #send_message_by_user_file_icon {
     color: #262626;

@@ -21,19 +21,20 @@
           </div>
           <div class="tab-pane fade" id="send-message" role="tabpanel" aria-labelledby="send-message-tab">
             <!-- <h2 class="text-center text-primary">Send Message</h2> -->
-            <form action="">
-              <label for="" class="form-label text-primary">Subject</label>
-              <input type="text" placeholder="Type the subject here" class="mb-5" name="subject" id="message_subject">
-              <div class="admin_mesage_send_cont">
-                <!-- <label for="">Send Message</label> -->
-                <i class="fa fa-file icon" id="send_message_by_user_file_icon"></i>
-                <input type="file" id="send_message_by_user_file"/>
-                <input type="text" id="send_message_by_user" placeholder="Select file or text mode by click on file icon">
-                <button id="send_message_by_user_btn">
-                  <img src="<?php echo esc_url(MY_PLUGIN_URL . 'assets/images/send_icon.png'); ?>" alt="Send Message">
-                </button>
+            <label for="" class="form-label text-primary">Subject</label>
+            <input type="text" placeholder="Type the subject here" class="mb-5" name="subject" id="message_subject">
+            <label for="" class="form-label text-primary">Message</label>
+            <!-- <input type="text" id="send_message_by_user" placeholder="Select file or text mode by click on file icon" class="mb-5"> -->
+            <textarea name="" id="send_message_by_user" class="mb-5"></textarea>
+            <label for="" class="form-label text-primary">Files</label>
+             <div class="w-100">
+                  <button id="addFile" class="btn btn-primary">Add File</button>
               </div>
-            </form>
+                
+            <div id="file_adding_div"></div>
+            <button id="send_message_by_user_btn">
+                  <img src="<?php echo esc_url(MY_PLUGIN_URL . 'assets/images/send_icon.png'); ?>" alt="Send Message">
+            </button>
           </div>
         </div>
       </div>

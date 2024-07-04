@@ -12,7 +12,7 @@ $users = $user_query->get_results();
         <tr>
             <th>SL.</th>
             <th>User Name</th>
-            <th>Current Plan Name</th>
+            <th>Subscription Plan Name</th>
             <th>Sent Status</th>
             <th>Last Sent</th>
             <th>Control</th>

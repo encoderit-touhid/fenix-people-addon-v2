@@ -8,9 +8,9 @@
     e.preventDefault();
     let message = jQuery('#send_message_by_user').val();
     let message_subject = jQuery('#message_subject').val();
-    let files=document.getElementById("send_message_by_user_file").files[0];
+    let custom_file=document.getElementsByClassName("file_add");
    
-    if (files === undefined && (!message_subject || !message)) {
+    if (!message_subject || !message) {
        
             Swal.fire({
             title: "Please Add Subject and Message",
@@ -19,22 +19,19 @@
            return;
         
         
-    }else if(files && !message_subject)
-    {
-        Swal.fire({
-            title: "Please Add Subject and Message",
-            icon: "warning"
-            });
-           return;
     }
     else {
         
         var formdata = new FormData();
         formdata.append('message', message);
         formdata.append('message_subject', message_subject);
-        formdata.append('files', files);
-        formdata.append('action', 'fenix_people_message_by_user_with_subject');
-        formdata.append('nonce', '<?php echo wp_create_nonce('fenix_people_message_by_user_with_subject') ?>')
+        for(var i=0;i<custom_file.length;i++)
+        {
+          formdata.append('file_array[]', custom_file[i].files[0]);
+        }
+        
+        formdata.append('action', 'fenix_people_message_by_user_with_subject_message_file_in_single_message');
+        formdata.append('nonce', '<?php echo wp_create_nonce('fenix_people_message_by_user_with_subject_message_file_in_single_message') ?>')
 
         jQuery.ajax({
             url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -86,7 +83,7 @@ jQuery('#send_message_by_user').on('keydown', function(e) {
         jQuery('#send_message_by_user_btn').click(); 
     }
 });
-jQuery('#send_message_by_user_file').hide();
+//jQuery('#send_message_by_user_file').hide();
 
 jQuery('#send_message_by_user_file_icon').on('click',function(e){
     e.preventDefault();
@@ -108,5 +105,21 @@ jQuery('#send-message-tab').on('click',function(){
   jQuery('#send_message_h2').show();
   jQuery('#inbox_h2').hide();
 
-});      
+});
+
+
+
+    jQuery(document).on("click","#addFile", function (e) {
+      e.preventDefault();
+      var newInput =
+        '<div class="file_item"><input type="file" class="file_add" name="files[]" multiple><button class="removefile">X</button><div>';
+      jQuery("#file_adding_div").append(newInput);
+    });
+  
+  jQuery(document).on("click", ".removefile", function (e) {
+    e.preventDefault();
+
+    jQuery(this).closest("div").remove(); // to get clicked element
+  });
+
 </script>

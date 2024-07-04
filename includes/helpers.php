@@ -110,7 +110,7 @@ if(!function_exists('get_the_current_plan_name_by_user_id'))
         $arm_user_last_plan=get_user_meta($user_id,'arm_user_last_plan', true);
         if(empty($arm_user_last_plan))
         {
-           return "-";
+           return "Not subscribed";
         }else
         {
             $plan_key='arm_user_plan_'.$arm_user_last_plan;

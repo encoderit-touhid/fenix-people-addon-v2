@@ -213,4 +213,62 @@ class message_inbox_functionalities
   
           wp_mail($to, $subject, $message, $headers);
      }
+
+     public static function fenix_people_message_by_user_with_subject_message_file_in_single_message()
+     {
+        
+        if (!wp_verify_nonce($_POST['nonce'], 'fenix_people_message_by_user_with_subject_message_file_in_single_message')) {
+            echo json_encode([
+                'success' => 'error',
+                'message'=>'Invalid Nonce field'
+            ]);
+        }else
+        {
+            global $wpdb;
+            $message_subject=$_POST['message_subject'];
+            $message=$_POST['message'];
+            $wpfenix_encoderit_fenix_people_chat_subjects=$wpdb->prefix . 'encoderit_fenix_people_chat_subjects';
+            $data = array(
+                "subject" => $message_subject,
+                "created_at" => date('Y-m-d H:i:s'),
+              );
+             $wpdb->insert($wpfenix_encoderit_fenix_people_chat_subjects, $data);
+             $lastid = $wpdb->insert_id;
+             $admin_notify_id=$lastid;
+             $encoderit_fenix_people_chats = $wpdb->prefix . 'encoderit_fenix_people_chats';
+             if(!empty($_FILES))
+             {
+                $saved_files=manage_financial_report::save_files_by_admin();
+                foreach(json_decode($saved_files,true) as $single_content)
+                {
+                    
+                    $data = array(
+                        "sender_id" => wp_get_current_user()->ID,
+                        "subject_id"=>$admin_notify_id,
+                        "receiver_id" => 1,
+                        "message" => json_encode($single_content),
+                        "is_file" => 1,
+                        "created_at" => date('Y-m-d H:i:s'),
+                      );
+                     $wpdb->insert($encoderit_fenix_people_chats, $data);
+                } 
+             }
+             $data = array(
+                "sender_id" => wp_get_current_user()->ID,
+                "subject_id"=>$admin_notify_id,
+                "receiver_id" => 1,
+                "message" => $message,
+                "is_file" => 0,
+                "created_at" => date('Y-m-d H:i:s'),
+              );
+             $wpdb->insert($encoderit_fenix_people_chats, $data);
+
+             self::message_notification_to_admin($admin_notify_id);
+             echo json_encode([
+                'success' => 'success',
+            ]);
+        }
+        wp_die();
+     }
+     
 }

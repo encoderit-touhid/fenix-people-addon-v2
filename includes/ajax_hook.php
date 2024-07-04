@@ -21,3 +21,6 @@ add_action('wp_ajax_fenix_people_message_by_admin_with_subject', array('message_
 
 
 add_action('wp_ajax_admin_financial_report_submit', array('manage_financial_report','admin_financial_report_submit'));
+
+add_action('wp_ajax_fenix_people_message_by_user_with_subject_message_file_in_single_message', array('message_inbox_functionalities','fenix_people_message_by_user_with_subject_message_file_in_single_message'));
+
