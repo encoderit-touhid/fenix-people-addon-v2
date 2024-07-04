@@ -23,6 +23,7 @@
 
 ?>
 <div class="full_width pe_20">
+    <h2 class="text-center m-3">Financial Report for <?=get_user_by('ID',$user_id)->display_name?></h2>
 <table id="financial_report_by_user" class="full_width">
     <thead>
         <tr>

@@ -21,7 +21,7 @@
         
     }
     else {
-        
+       swal.showLoading();
         var formdata = new FormData();
         formdata.append('message', message);
         formdata.append('message_subject', message_subject);

@@ -11,6 +11,9 @@
     jQuery(document).on('click','.adding_financial_report_modal',function(e){
        e.preventDefault();
        jQuery('#user_id_to_report').val(jQuery(this).data('user_id'));
+       jQuery('#report_title').val("");
+       jQuery('#user_id_to_report').val("");
+       jQuery('#file_adding_div').empty();
        jQuery('#createModal').modal('show');
     })
     
