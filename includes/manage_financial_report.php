@@ -116,15 +116,21 @@ class manage_financial_report
         $user_id=$_POST['user_id'];
 
         global $wpdb;
-
+        
        // $table_name=$wpdb->prefix . 'encoderit_fenix_people_form';
        // $sql="SELECT * FROM " . $table_name . " WHERE id = '$search_data'";
       //  $result=$wpdb->get_row($sql);
         $subscriber=get_user_by('ID',$user_id);
+        $first_name=get_user_meta( $value->ID, 'first_name', true );
+        $last_name=get_user_meta( $value->ID, 'last_name', true );
+        
+        $full_name= $first_name.' '. $last_name;
+
+        $name=$subscriber->display_name ? $subscriber->display_name : (!empty($full_name) ? $full_name  :$subscriber->user_email) ;
 
         $to = $subscriber->user_email;
 
-		$subject = 'Admin Upload Financial Report ' . ' (' . $subscriber->display_name . ')';
+		$subject = 'Admin Upload Financial Report ' . ' (' . $name. ')';
         
         $view_service_request_link=site_url() .'/my-account/user-financial-report' ;
 

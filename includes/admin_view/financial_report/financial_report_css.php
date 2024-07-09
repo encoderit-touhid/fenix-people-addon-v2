@@ -80,4 +80,14 @@
 .file_item:not(:last-child){
   margin-bottom: 15px;
 }
+
+#financial_document_admin th,
+#financial_document_admin td
+{
+white-space: nowrap;
+  /*   max-width: 200px; */
+}
+#financial_document_admin_wrapper .dt-layout-cell  {
+  overflow: auto;
+}
 </style>

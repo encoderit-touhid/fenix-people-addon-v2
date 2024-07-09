@@ -12,6 +12,9 @@ $users = $user_query->get_results();
         <tr>
             <th>SL.</th>
             <th>User Name</th>
+            <th>User Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Subscription Plan Name</th>
             <th>Sent Status</th>
             <th>Last Sent</th>
@@ -22,11 +25,16 @@ $users = $user_query->get_results();
         <?php 
         foreach($users as $key=>$value)
         {
-            $get_the_financial_report_sent_status=get_the_financial_report_sent_status($value->ID)
+            $get_the_financial_report_sent_status=get_the_financial_report_sent_status($value->ID);
+            $first_name=get_user_meta( $value->ID, 'first_name', true );
+            $last_name=get_user_meta( $value->ID, 'last_name', true );
            ?>
            <tr>
             <td><?php echo $key+1?></td>
             <td><?php echo $value->display_name?></td>
+            <td><?php echo trim($value->user_email)?></td>
+            <td><?php echo !empty($first_name) ? $first_name : '-' ?></td>
+            <td><?php echo !empty($last_name) ? $last_name : '-' ?></td>
             <td><?php echo get_the_current_plan_name_by_user_id($value->ID)?></td>
             <td id="sent_status_<?php echo $value->ID?>"><?php echo !empty($get_the_financial_report_sent_status) ? "Sent" :"Not sent any"?></td>
             <td id="created_status_<?php echo $value->ID?>"><?php echo !empty($get_the_financial_report_sent_status->created_at) ? $get_the_financial_report_sent_status->created_at :" " ?></td>

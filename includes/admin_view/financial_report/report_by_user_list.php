@@ -20,10 +20,15 @@
 //     echo "404 not allowed";
 //     exit;
 // }  
+$user=get_user_by('ID',$user_id);
+$full_name='';
+$first_name=get_user_meta( $user_id, 'first_name', true );
+$last_name=get_user_meta( $user_id, 'last_name', true );
+$full_name=$first_name.' '.$last_name;
 
 ?>
 <div class="full_width pe_20">
-    <h2 class="text-center m-3">Financial Report for <?=get_user_by('ID',$user_id)->display_name?></h2>
+    <h2 class="text-center m-3">Financial Report for <?php echo  !empty($user->display_name) ? $user->display_name : (!empty($full_name) ? $full_name : $user->user_email)  ?></h2>
 <table id="financial_report_by_user" class="full_width">
     <thead>
         <tr>
