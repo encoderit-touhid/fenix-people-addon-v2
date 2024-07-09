@@ -203,4 +203,15 @@
     font-size: 16px !important;
     font-weight: 400 !important;
   }
+  #request_service_client_wrapper .dt-layout-cell {
+    overflow: auto;
+  }
+  #request_service_client_wrapper #request_service_client th
+  {
+white-space: nowrap;
+  }
+  
+  #request_service_client_wrapper #request_service_client td{
+    /* max-width: 250px; */
+  }
 </style>

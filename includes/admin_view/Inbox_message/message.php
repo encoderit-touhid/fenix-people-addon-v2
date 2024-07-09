@@ -12,7 +12,10 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . "  ORDER BY id DES
                 <tr>
                     <th>ID</th>
                     <th>Subject</th>
-                    <th>User</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Details</th>
                     <th>Created at</th>
                 </tr>
@@ -22,11 +25,15 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . "  ORDER BY id DES
                 foreach($result as $key=>$value)
                 {
                     $view_link=admin_url() .'admin.php'. '?page=fenix-people-messages-admin-inbox-details-view&id=' . $value->id;
+                    $user_info=enc_get_client_name_by_message_subject($value->id);
                     ?>
                     <tr>
-                        <td>#<?=$value->id?></td>
+                        <td>#<?=$key+1?></td>
                         <td><?=$value->subject?></td>
-                        <td><?=enc_get_client_name_by_message_subject($value->id)?></td>
+                        <td><?=$user_info['display_name']?></td>
+                        <td><?=$user_info['user_email']?></td>
+                        <td><?=$user_info['first_name']?></td>
+                        <td><?=$user_info['last_name']?></td>
                         <td><a  href="<?=$view_link?>" class="btn btn-primary button"  style="background-color: #009B00;color: black">Details</a></td>
                         <td><?=$value->created_at?></td>
                     </tr>

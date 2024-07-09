@@ -80,9 +80,17 @@ if(!function_exists('enc_get_client_name_by_message_subject'))
         
         $get_client_user_name=$wpdb->get_row($get_client_user_name);
         
-        $client_id=$get_client_user_name->sender_id == 1 ? $get_client_user_name->receiver_id :$get_client_user_name->sender_id;  
-        
-       return  get_user_by('ID',$client_id)->display_name; 
+        $client_id=$get_client_user_name->sender_id == 1 ? $get_client_user_name->receiver_id :$get_client_user_name->sender_id; 
+        $user_object=get_user_by('ID',$client_id); 
+        $first_name=get_user_meta( $client_id, 'first_name', true );
+        $last_name=get_user_meta( $client_id, 'last_name', true );
+
+       return  [
+            'display_name'=>$user_object->display_name,
+            'first_name'=>$first_name,
+            'last_name'=>$last_name,
+            'user_email'=>$user_object->user_email
+       ];
     }
 }
 

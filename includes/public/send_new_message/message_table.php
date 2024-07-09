@@ -5,7 +5,7 @@ $encoderit_fenix_people_chats = $wpdb->prefix . 'encoderit_fenix_people_chats';
 $user_id=get_current_user_id();
 
 $sql = "SELECT *from $encoderit_fenix_people_chat_subjects where id in ( SELECT distinct subject_id FROM " . $encoderit_fenix_people_chats . "
-          where  sender_id=$user_id or receiver_id=$user_id)";
+          where  sender_id=$user_id or receiver_id=$user_id) order by id desc";
 
 $result=$wpdb->get_results($sql);
 //var_dump($result);
@@ -29,7 +29,7 @@ $result=$wpdb->get_results($sql);
                 $view_link=site_url().'/my-account/send-user-details-message?id=' . $value->id;
                 ?>
                 <tr>
-                    <td>#<?=$value->id?></td>
+                    <td>#<?=$key+1?></td>
                     <td><?=$value->subject?></td>
                     <td><a  href="<?=$view_link?>" class="button">Details</a></td>
                     <td><?=$value->created_at?></td>

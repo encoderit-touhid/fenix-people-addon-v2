@@ -34,11 +34,18 @@
  $get_client_user_name=$wpdb->get_row($get_client_user_name);
  
  $client_id=$get_client_user_name->sender_id == 1 ? $get_client_user_name->receiver_id :$get_client_user_name->sender_id;  
-  
+ 
+
+ $user_info_showing_id=$client_id;
+ $user_showing=get_user_by('ID',$user_info_showing_id);
+ $full_name='';
+ $first_name=get_user_meta( $user_id, 'first_name', true );
+ $last_name=get_user_meta( $user_id, 'last_name', true );
+ $full_name=$first_name.' '.$last_name;
 
   ?>
   <div class="message_div">
-    <h2 class="user_name_chat"><?php echo $get_subject_name->subject?> <?php echo get_user_by('ID',$get_client_user_name->sender_id)->display_name ?? get_user_by('ID',$get_client_user_name->receiver_id)->display_name  ;?></h2>
+    <h2 class="user_name_chat"><?php echo $get_subject_name->subject?>  <?php echo  !empty($user_showing->display_name) ? $user_showing->display_name : (!empty($full_name) ? $full_name : $user_showing->user_email)?></h2>
    <?php
         if(!empty($messages))
         {
