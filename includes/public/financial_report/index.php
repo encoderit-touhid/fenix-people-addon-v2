@@ -47,7 +47,7 @@
                     $is_ssl=true;
                 }
                 $files=[];
-                
+                $file_html='';
                 foreach ($files_by_admin as $file) {
                     if($is_ssl)
                     {
@@ -58,6 +58,7 @@
                         $file_path = wp_upload_dir()['baseurl'].$file['paths'];
                     }
                     array_push($files,$file_path);
+                    $file_html .='<a href="'.$file_path.'" class="btn btn-primary">'.$file['name'].'</a> <br>';
                 }
                 $case_id=$value->id;
                 $a=implode(',',$files);
@@ -67,14 +68,15 @@
                 //$download_button_tag='<a href="#" class="btn btn-primary"  data-case="'.$case_id.'" data-name="'.$file_name_string.'"   data-file="'.$a.'" id="'.$id.'" onclick="enc_download(this.id)">Download ZIP</a>';
                 $single_report_link=site_url() .'/my-account/user-financial-report-single-file-download/?report_id='.$case_id ;
                 $download_button_tag='<a href="'.$single_report_link.'" class="btn btn-primary">View Files</a>';
-
+                
+                
                 
             ?>
             <tr>
                 <td><?php echo $key+1?></td>
                 <td><?php echo $value->report_title?></td>
                 <td><?php echo $value->report_content?></td>
-                <td><?php echo $download_button_tag?></td>
+                <td><?php echo $file_html?></td>
                 <td><?php echo $value->created_at?></td>
             </tr>
             <?php     

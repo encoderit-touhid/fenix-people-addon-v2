@@ -52,7 +52,7 @@ $full_name=$first_name.' '.$last_name;
                   $is_ssl=true;
                }
               $files=[];
-              
+              $file_html='';
               foreach ($files_by_admin as $file) {
                   if($is_ssl)
                   {
@@ -63,6 +63,7 @@ $full_name=$first_name.' '.$last_name;
                       $file_path = wp_upload_dir()['baseurl'].$file['paths'];
                   }
                   array_push($files,$file_path);
+                  $file_html .='<a href="'.$file_path.'" class="btn btn-primary">'.$file['name'].'</a> <br><br>';
               }
               $case_id=$value->id;
               $a=implode(',',$files);
@@ -78,7 +79,7 @@ $full_name=$first_name.' '.$last_name;
             <td><?php echo $key+1?></td>
             <td><?php echo $value->report_title?></td>
             <td><?php echo $value->report_content?></td>
-            <td><?php echo $single_report_link?></td>
+            <td><?php echo $file_html?></td>
             <td><?php echo $value->created_at?></td>
            </tr>
            <?php     
