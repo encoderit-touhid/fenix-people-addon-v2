@@ -155,3 +155,26 @@ function remove_my_account_menu_items( $items ) {
 
     return $items;
 }
+
+
+
+  /*** Financial Report  Single File Download */
+
+  add_action( 'init', 'user_financial_report_single_file_download_endpoint' );
+  function user_financial_report_single_file_download_endpoint() {
+     
+      // Check WP_Rewrite
+      add_rewrite_endpoint( 'user-financial-report-single-file-download', EP_PAGES );
+   
+  }
+  /*
+   * Step 3. Content for the new page in My Account, woocommerce_account_{ENDPOINT NAME}_endpoint
+   */
+  add_action( 'woocommerce_account_user-financial-report-single-file-download_endpoint', 'user_financial_report_single_file_download' );
+  function user_financial_report_single_file_download() {
+   
+      // Content for new page
+      include(dirname( __FILE__ ).'/public/financial_report/single_file_download.php');
+  
+   
+  }

@@ -64,7 +64,9 @@
             
                 $file_name_string='#'.$case_id.'-'.date('Y-m-d-H-i-s').'-'.$value->user_id;
                 $id="user_id_enc_don_".$case_id;
-                $download_button_tag='<a href="#" class="btn btn-primary"  data-case="'.$case_id.'" data-name="'.$file_name_string.'"   data-file="'.$a.'" id="'.$id.'" onclick="enc_download(this.id)">Download ZIP</a>';
+                //$download_button_tag='<a href="#" class="btn btn-primary"  data-case="'.$case_id.'" data-name="'.$file_name_string.'"   data-file="'.$a.'" id="'.$id.'" onclick="enc_download(this.id)">Download ZIP</a>';
+                $single_report_link=site_url() .'/my-account/user-financial-report-single-file-download/?report_id='.$case_id ;
+                $download_button_tag='<a href="'.$single_report_link.'" class="btn btn-primary">View Files</a>';
 
                 
             ?>

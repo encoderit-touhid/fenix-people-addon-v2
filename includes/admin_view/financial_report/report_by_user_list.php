@@ -71,13 +71,14 @@ $full_name=$first_name.' '.$last_name;
               $id="user_id_enc_don_".$case_id;
               $download_button_tag='<a href="#" class="btn btn-primary"  data-case="'.$case_id.'" data-name="'.$file_name_string.'"   data-file="'.$a.'" id="'.$id.'" onclick="enc_download(this.id)">Download ZIP</a>';
 
+              $single_report_link='<a href="'.admin_url() .'admin.php?page=fenix-people-financial-report-admin-single-details&id='.$value->id.'" class="btn btn-primary">View files</a>';
               
            ?>
            <tr>
             <td><?php echo $key+1?></td>
             <td><?php echo $value->report_title?></td>
             <td><?php echo $value->report_content?></td>
-            <td><?php echo $download_button_tag?></td>
+            <td><?php echo $single_report_link?></td>
             <td><?php echo $value->created_at?></td>
            </tr>
            <?php     

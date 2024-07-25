@@ -35,4 +35,6 @@
     add_submenu_page('options.php', 'Fenix People Message Details', 'Fenix People Message Details', 'manage_options', 'fenix-people-messages-admin-inbox-details-view', array( 'message_inbox_functionalities', 'message_inbox_functionalities_admin_single_user_index' ));
 
     add_submenu_page('options.php', 'Fenix People Financial report Details', 'Fenix People Financial report Details', 'manage_options', 'fenix-people-financial-report-admin-report-list-by-user', array( 'manage_financial_report', 'fenix_people_financial_report_admin_report_list_by_user' ));
+
+    add_submenu_page('options.php', 'Fenix People Financial report Single Details', 'Fenix People Financial report Single Details', 'manage_options', 'fenix-people-financial-report-admin-single-details', array( 'manage_financial_report', 'fenix_people_financial_report_admin_single_details' ));
  }

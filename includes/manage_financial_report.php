@@ -148,4 +148,9 @@ class manage_financial_report
     {
         require_once( dirname( __FILE__ ).'/admin_view/financial_report/report_by_user_list.php' );
     }
+
+    public static function fenix_people_financial_report_admin_single_details()
+    {
+        require_once( dirname( __FILE__ ).'/admin_view/financial_report/report_single_details.php' );
+    }
 }
