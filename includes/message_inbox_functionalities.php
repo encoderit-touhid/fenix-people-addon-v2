@@ -270,5 +270,70 @@ class message_inbox_functionalities
         }
         wp_die();
      }
-     
+     public static function message_inbox_functionalities_admin_user_list_send_message()
+     {
+        require_once( dirname( __FILE__ ).'/admin_view/inbox_message/send_message.php' );
+     }
+
+     public static function fenix_people_message_by_admin_with_subject_message_file_in_single_message()
+     {
+        
+        if (!wp_verify_nonce($_POST['nonce'], 'fenix_people_message_by_admin_with_subject_message_file_in_single_message')) {
+            echo json_encode([
+                'success' => 'error',
+                'message'=>'Invalid Nonce field'
+            ]);
+        }else
+        {
+            global $wpdb;
+            $message_subject=$_POST['subject'];
+            $message=$_POST['message_content'];
+            $receiver_id=$_POST['receiver_id'];
+            $wpfenix_encoderit_fenix_people_chat_subjects=$wpdb->prefix . 'encoderit_fenix_people_chat_subjects';
+            $data = array(
+                "subject" => $message_subject,
+                "created_at" => date('Y-m-d H:i:s'),
+              );
+             $wpdb->insert($wpfenix_encoderit_fenix_people_chat_subjects, $data);
+             $lastid = $wpdb->insert_id;
+             $admin_notify_id=$lastid;
+             $encoderit_fenix_people_chats = $wpdb->prefix . 'encoderit_fenix_people_chats';
+             if(!empty($_FILES))
+             {
+                $saved_files=manage_financial_report::save_files_by_admin();
+                foreach(json_decode($saved_files,true) as $single_content)
+                {
+                    
+                    $data = array(
+                        "sender_id" => 1,
+                        "subject_id"=>$admin_notify_id,
+                        "receiver_id" => $receiver_id,
+                        "message" => json_encode($single_content),
+                        "is_file" => 1,
+                        "created_at" => date('Y-m-d H:i:s'),
+                      );
+                     $wpdb->insert($encoderit_fenix_people_chats, $data);
+                } 
+             }
+             $data = array(
+                "sender_id" => 1,
+                "subject_id"=>$admin_notify_id,
+                "receiver_id" => $receiver_id,
+                "message" => $message,
+                "is_file" => 0,
+                "created_at" => date('Y-m-d H:i:s'),
+              );
+             $wpdb->insert($encoderit_fenix_people_chats, $data);
+
+            // self::message_notification_to_admin($admin_notify_id);
+             self::message_notification_to_user($admin_notify_id);
+
+             $redirect_to=admin_url() .'admin.php'. '?page=fenix-people-messages-admin-inbox-details-view&id=' . $admin_notify_id;
+             echo json_encode([
+                'success' => 'success',
+                'redirect_to'=>$redirect_to
+            ]);
+        }
+        wp_die();
+     }
 }

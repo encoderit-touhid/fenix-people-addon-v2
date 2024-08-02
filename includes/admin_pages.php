@@ -14,7 +14,9 @@
 
     //add_menu_page('Fenix People Messages', 'Fenix People Messages', 'manage_options', 'fenix-people-messages-admin',array( 'fenix_people_admin_functionalities', 'fenix_people_messages_admin' ), 'dashicons-admin-generic', 4);
 
-    add_menu_page('Fenix People Messages', 'Fenix People Messages', 'manage_options', 'fenix-people-messages-inbox-admin',array( 'message_inbox_functionalities', 'message_inbox_functionalities_admin_user_list' ), 'dashicons-admin-generic', 4);
+    add_menu_page('Fenix People Message Inbox', 'Fenix People Message Inbox', 'manage_options', 'fenix-people-messages-inbox-admin',array( 'message_inbox_functionalities', 'message_inbox_functionalities_admin_user_list' ), 'dashicons-admin-generic', 3);
+
+    add_menu_page('Fenix People Send Message', 'Fenix People Send Message','manage_options', 'fenix-people-messages-inbox-admin-send-message',array( 'message_inbox_functionalities', 'message_inbox_functionalities_admin_user_list_send_message' ), 'dashicons-admin-generic', 3);
 
     // add_submenu_page('options.php', 'Fenix People Message Details', 'Fenix People Message Details', 'manage_options', 'fenix-people-messages-admin-details-view', array( 'fenix_people_admin_functionalities', 'fenix_people_messages_admin_details_view' ));
     

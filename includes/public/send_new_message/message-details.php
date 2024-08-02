@@ -3,6 +3,7 @@ $subject_id=$_GET['id'];
 if(empty($subject_id) || !isset($subject_id))
 {
     echo "<h1>You are not Allowed</h1>";
+    exit;
 }
 ?>
 <div class="message_main_container">
@@ -12,11 +13,13 @@ if(empty($subject_id) || !isset($subject_id))
   $user_id=wp_get_current_user()->ID;
   $sql="SELECT * FROM " . $table_name . "
           where  subject_id=$subject_id and (sender_id=$user_id or receiver_id=$user_id)";
-     
+  //var_dump($sql);
+  //exit;   
   $messages=$wpdb->get_results($sql);
   if(empty($messages))
   {
     echo "<h1>You are not Allowed</h1>";
+    exit;
   }
   $wpfenix_encoderit_fenix_people_chat_subjects = $wpdb->prefix . 'encoderit_fenix_people_chat_subjects';
   $user_id=wp_get_current_user()->ID;
