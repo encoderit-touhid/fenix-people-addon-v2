@@ -37,7 +37,7 @@ $result = $user_query->get_results();
                         <td><?=$value->display_name?></td>
                         <td><?=$value->user_email?></td>
                         <td><?php echo !empty($first_name) ? $first_name : '-' ?></td>
-                        <td><?php echo !empty($last_name) ? $first_name : '-' ?></td>
+                        <td><?php echo !empty($last_name) ? $last_name : '-' ?></td>
                         <td><a href="" class="btn btn-primary adding_financial_report_modal" data-user_name="<?=$data_user_name_showing?>" data-user_id="<?=$value->ID?>">Send Message</a></td>
                     </tr>
                     <?php
