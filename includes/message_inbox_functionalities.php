@@ -87,7 +87,7 @@ class message_inbox_functionalities
 
         
 
-          self::message_notification_to_admin($admin_notify_id);
+          self::message_notification_to_admin($admin_notify_id,$message);
           echo json_encode([
              'success' => 'success',
              'file_url'=>$file_url
@@ -97,16 +97,31 @@ class message_inbox_functionalities
      }
      wp_die();    
      }
-     public static function message_notification_to_admin($admin_notify_id)
+     public static function message_notification_to_admin($admin_notify_id,$input_message)
      {
-          $to = get_option('admin_email');
-  
-          $subject = 'Message sent from ' . ' (' . wp_get_current_user()->display_name . ')';
+            $to = get_option('admin_email');
+            $user_id=get_current_user_id();
+            $user_client=get_user_by('ID', $user_id);
+            $full_name='';
+            $first_name=get_user_meta( $user_id, 'first_name', true );
+            $last_name=get_user_meta( $user_id, 'last_name', true );
+            $full_name=$first_name.' '.$last_name;
+
+          $client_name=!empty($user_client->display_name) ? $user_client->display_name : (!empty($full_name) ? $full_name : $user_client->user_email);
+
+          $subject = 'Message sent from ' . ' (' .$client_name . ')';
           $view_message_link=admin_url() .'admin.php'. '?page=fenix-people-messages-admin-inbox-details-view&id=' . $admin_notify_id;
-  
-          $message = '<p>To view Message click below</p>';
-  
-          $message .= '<a href="'.$view_message_link.'">Click Here</a>';
+          
+          $message   ="<p>Hi Admin,</p>";
+          $message  .="<p>You have received a new message from ".$client_name."</p>";
+
+          if(isJson($input_message))
+          {
+            $message  .= '<p>'.$client_name.' sent some files <a href="'.$view_message_link.'">View the Files</a></p>';
+          }else
+          {
+            $message  .= '<p>'.get_first_15_words($input_message).' <a href="'.$view_message_link.'">Read More</a></p>';
+          }
   
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -186,7 +201,7 @@ class message_inbox_functionalities
                  "created_at" => date('Y-m-d H:i:s'),
                );
               $wpdb->insert($table_name, $data);
-              self::message_notification_to_user($_POST['subject_id']);
+              self::message_notification_to_user($_POST['subject_id'],$message);
               echo json_encode([
                  'success' => 'success',
                  'file_url'=>$file_url
@@ -196,17 +211,50 @@ class message_inbox_functionalities
        wp_die(); 
  
      }
-     public static function message_notification_to_user($subject_id)
+     public static function message_notification_to_user($subject_id,$input_message)
      {
-          $to = get_user_by('ID', $_POST['receiver_id'])->user_email;
-  
-          $subject = 'Message sent from ' . ' (' . wp_get_current_user()->display_name . ')';
+          
+          
+          $user_id=$_POST['receiver_id'];
+          $user=get_user_by('ID',$user_id);
+          $full_name='';
+          $first_name=get_user_meta( $user_id, 'first_name', true );
+          $last_name=get_user_meta( $user_id, 'last_name', true );
+          $full_name=$first_name.' '.$last_name;
+          $client_name=!empty($user->display_name) ? $user->display_name : (!empty($full_name) ? $full_name : $user->user_email);
+         
+          $current_admin_id=get_current_user_id();
+          $user_current_admin=get_user_by('ID',$current_admin_id);
+          $full_name_current_admin='';
+          $first_name_current_admin=get_user_meta( $current_admin_id, 'first_name', true );
+          $last_name_current_admin=get_user_meta( $current_admin_id, 'last_name', true );
+          $full_name_current_admin=$first_name_current_admin.' '.$last_name_current_admin;
+
+          $admin_name=!empty($user_current_admin->display_name) ? $user_current_admin->display_name : (!empty($full_name_current_admin) ? $full_name_current_admin : $user_current_admin->user_email);
+
+          $to = get_user_by('ID',  $user_id)->user_email;
+          
+
+          $subject = 'Message sent from ' . ' (' . $admin_name. ')';
           //'/my-account/send-user-message/';
           $view_message_link=site_url(). '/my-account/send-user-details-message/?id='.$subject_id;
+
+          $message   ="<p>Hi ".$client_name.",</p>";
+          $message  .="<p>You have received a new message from FenixPeople</p>";
+
+
+          if(isJson($input_message))
+          {
+            $message  .= '<p>Admin sent some files <a href="'.$view_message_link.'">View the Files</a></p>';
+          }else
+          {
+            $message  .= '<p>'.get_first_15_words($input_message).' ... <a href="'.$view_message_link.'">Read More</a></p>';
+          }
+         
   
-          $message = '<p>To view Message click below</p>';
+          $message  .="<p>Thanks</p>";
+          $message  .='<p><a href="'.site_url().'">FenixPeople</a></p>';
   
-          $message .= '<a href="'.$view_message_link.'">Click Here</a>';
   
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -263,7 +311,7 @@ class message_inbox_functionalities
               );
              $wpdb->insert($encoderit_fenix_people_chats, $data);
 
-             self::message_notification_to_admin($admin_notify_id);
+             self::message_notification_to_admin($admin_notify_id,$message);
              echo json_encode([
                 'success' => 'success',
             ]);
@@ -326,7 +374,7 @@ class message_inbox_functionalities
              $wpdb->insert($encoderit_fenix_people_chats, $data);
 
             // self::message_notification_to_admin($admin_notify_id);
-             self::message_notification_to_user($admin_notify_id);
+             self::message_notification_to_user($admin_notify_id,$message);
 
              $redirect_to=admin_url() .'admin.php'. '?page=fenix-people-messages-admin-inbox-details-view&id=' . $admin_notify_id;
              echo json_encode([

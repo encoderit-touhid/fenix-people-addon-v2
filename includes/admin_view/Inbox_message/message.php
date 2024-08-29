@@ -60,4 +60,4 @@ $result = $wpdb->get_results("SELECT * FROM " . $table_name . "  ORDER BY id DES
 //include_once($css_path);
 
 include_once( dirname( __FILE__ ).'/inbox_message_admin_css.php');
-include_once( dirname( __FILE__ ).'/inbox_message_admin_js.php');
+//include_once( dirname( __FILE__ ).'/inbox_message_admin_js.php');

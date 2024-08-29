@@ -52,10 +52,10 @@
               });
               return false;      
       }
-      if(custom_file.length == 0 && !message_content)
+      if(!message_content)
       {
         swal.fire({
-                text: "Please Add file or Message",
+                text: "Please Add Message",
               });
                
         return false; 

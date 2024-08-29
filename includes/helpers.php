@@ -148,3 +148,32 @@ if(!function_exists('get_arm_subscription_plans_by_id'))
      }
 }
 
+if(!function_exists('isJson'))
+{   
+     function isJson($string)
+     {
+        
+        return ((is_string($string) &&
+        (is_object(json_decode($string)) ||
+        is_array(json_decode($string))))) ? true : false;  
+        
+     }
+}
+
+if(!function_exists('get_first_15_words'))
+{   
+     function get_first_15_words($string)
+     {
+        
+        $words = explode(' ', $string);  // Split the string into an array of words
+        $firstFifteenWords = array_slice($words, 0, 15);  // Get the first 15 words
+
+        $result = implode(' ', $firstFifteenWords);  // Join the words back into a string
+
+        return $result;
+        
+     }
+}
+
+
+
