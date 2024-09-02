@@ -8,6 +8,9 @@ $sql = "SELECT *from $encoderit_fenix_people_chat_subjects where id in ( SELECT 
           where  sender_id=$user_id or receiver_id=$user_id) order by id desc";
 
 $result=$wpdb->get_results($sql);
+
+
+
 $user=get_user_by('ID',$user_id);
 $full_name='';
 $first_name=get_user_meta( $user_id, 'first_name', true );
@@ -32,12 +35,28 @@ $full_name=$first_name.' '.$last_name;
             <?php
             foreach($result as $key=>$value)
             {
+                $sql = "SELECT *from $encoderit_fenix_people_chats where subject_id=$value->id order by id asc limit 1";
+                $chat_data=$wpdb->get_row($sql);
+               
+
+                if($chat_data->sender_id != $user_id)
+                {
+                    $from="Fenix People Admin";
+                    $to=!empty($user->display_name) ? $user->display_name : (!empty($full_name) ? $full_name : $user->user_email);
+                }else
+                { 
+                    $to="Fenix People Admin";
+                    $from=!empty($user->display_name) ? $user->display_name : (!empty($full_name) ? $full_name : $user->user_email);
+                    
+                }
+                
+
                 $view_link=site_url().'/my-account/send-user-details-message?id=' . $value->id;
                 ?>
                 <tr>
                     <td>#<?=$key+1?></td>
-                    <td>Fenix People Admin</td>
-                    <td><?=!empty($user->display_name) ? $user->display_name : (!empty($full_name) ? $full_name : $user->user_email)?></td>
+                    <td><?=$from?></td>
+                    <td><?=$to?></td>
                     <td><?=$value->subject?></td>
                     <td><a  href="<?=$view_link?>" class="button">Details</a></td>
                     <td><?=$value->created_at?></td>
